@@ -2,10 +2,10 @@
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 16, 2020 at 11:31 AM
--- Server version: 5.7.18
--- PHP Version: 7.3.5
+-- Hôte : 127.0.0.1:3306
+-- Généré le :  mer. 25 mars 2020 à 11:35
+-- Version du serveur :  5.7.26
+-- Version de PHP :  7.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,242 +19,169 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `boutique`
+-- Base de données :  `boutique`
 --
-CREATE DATABASE IF NOT EXISTS `boutique` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS `boutique` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `boutique`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Structure de la table `adress`
 --
 
-CREATE TABLE `categories` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `adress`;
+CREATE TABLE IF NOT EXISTS `adress` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `adresse` varchar(500) NOT NULL,
+  `zip_code` int(11) NOT NULL,
+  `city` varchar(140) NOT NULL,
+  `country` varchar(140) NOT NULL,
+  `name_adresse` varchar(255) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comments`
+-- Structure de la table `basket`
 --
 
-CREATE TABLE `comments` (
-  `id` int(11) NOT NULL,
-  `product` int(11) NOT NULL,
-  `user` int(11) NOT NULL,
-  `comment` varchar(255) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `basket`;
+CREATE TABLE IF NOT EXISTS `basket` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_product` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- Structure de la table `category`
 --
 
-CREATE TABLE `products` (
-  `id` int(11) NOT NULL,
-  `price` float NOT NULL,
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE IF NOT EXISTS `category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `category` int(11) NOT NULL,
-  `subcategory` int(11) NOT NULL,
-  `description` varchar(2000) NOT NULL,
-  `image` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `description` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `purchases`
+-- Structure de la table `comments`
 --
 
-CREATE TABLE `purchases` (
-  `id` int(11) NOT NULL,
-  `product` int(11) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `user` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_product` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `message` varchar(500) NOT NULL,
+  `rate` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ratings`
+-- Structure de la table `product`
 --
 
-CREATE TABLE `ratings` (
-  `id` int(11) NOT NULL,
-  `product` int(11) NOT NULL,
-  `user` int(11) NOT NULL,
-  `rating` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `product`;
+CREATE TABLE IF NOT EXISTS `product` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(140) NOT NULL,
+  `description` varchar(500) NOT NULL,
+  `img` varchar(255) NOT NULL,
+  `price` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `id_subcat` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subcategories`
+-- Structure de la table `purchase`
 --
 
-CREATE TABLE `subcategories` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `purchase`;
+CREATE TABLE IF NOT EXISTS `purchase` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) NOT NULL,
+  `id_adress` int(11) NOT NULL,
+  `price` int(11) NOT NULL,
+  `date` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `purchase_product`
+--
+
+DROP TABLE IF EXISTS `purchase_product`;
+CREATE TABLE IF NOT EXISTS `purchase_product` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_purchase` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `sub_category`
+--
+
+DROP TABLE IF EXISTS `sub_category`;
+CREATE TABLE IF NOT EXISTS `sub_category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `category` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `description` varchar(255) NOT NULL,
+  `id_category` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Structure de la table `user`
 --
 
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `lastname` varchar(255) NOT NULL,
   `firstname` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(60) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `mail` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `grade` varchar(140) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 
 --
--- Indexes for dumped tables
+-- Structure de la table `wishlist`
 --
 
---
--- Indexes for table `categories`
---
-ALTER TABLE `categories`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `comments`
---
-ALTER TABLE `comments`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `product` (`product`),
-  ADD UNIQUE KEY `author` (`user`);
-
---
--- Indexes for table `products`
---
-ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `category` (`category`),
-  ADD UNIQUE KEY `subcategory` (`subcategory`);
-
---
--- Indexes for table `purchases`
---
-ALTER TABLE `purchases`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `product` (`product`),
-  ADD UNIQUE KEY `user` (`user`);
-
---
--- Indexes for table `ratings`
---
-ALTER TABLE `ratings`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `product` (`product`),
-  ADD UNIQUE KEY `user` (`user`);
-
---
--- Indexes for table `subcategories`
---
-ALTER TABLE `subcategories`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `category` (`category`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `categories`
---
-ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `comments`
---
-ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `products`
---
-ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `purchases`
---
-ALTER TABLE `purchases`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `ratings`
---
-ALTER TABLE `ratings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `subcategories`
---
-ALTER TABLE `subcategories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `comments`
---
-ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`product`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `products`
---
-ALTER TABLE `products`
-  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category`) REFERENCES `categories` (`id`),
-  ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`subcategory`) REFERENCES `subcategories` (`id`);
-
---
--- Constraints for table `purchases`
---
-ALTER TABLE `purchases`
-  ADD CONSTRAINT `purchases_ibfk_1` FOREIGN KEY (`product`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `purchases_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `ratings`
---
-ALTER TABLE `ratings`
-  ADD CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`product`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `ratings_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `subcategories`
---
-ALTER TABLE `subcategories`
-  ADD CONSTRAINT `subcategories_ibfk_1` FOREIGN KEY (`category`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+DROP TABLE IF EXISTS `wishlist`;
+CREATE TABLE IF NOT EXISTS `wishlist` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
