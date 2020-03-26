@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mer. 25 mars 2020 à 16:27
+-- Généré le :  jeu. 26 mars 2020 à 09:43
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.18
 
@@ -150,6 +150,7 @@ CREATE TABLE IF NOT EXISTS `purchase` (
   `id_adress` int(11) NOT NULL,
   `price` int(11) NOT NULL,
   `date` date NOT NULL,
+  `means` varchar(140) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
