@@ -1,1 +1,0 @@
-dossier pour toutes les images
