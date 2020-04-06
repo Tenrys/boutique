@@ -20,7 +20,7 @@ $id_user = $_SESSION['user']->getId();
 ?>
 
 <head>
-        <title>Mon compte</title> 
+        <title>Carnet d'adresses</title> 
         <link rel="stylesheet" href="css/style.css">
 </head>
 

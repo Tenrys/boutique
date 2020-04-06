@@ -19,7 +19,7 @@ class user extends bdd{
                 if($password == $cpassword)
                 {   
                     $connexion = $this->connect();
-                    var_dump($connexion);
+                   // var_dump($connexion);
                     $request = $connexion->prepare("SELECT id FROM user WHERE mail = '$mail'");
                     $request->execute();
                     $check = $request->rowCount();
