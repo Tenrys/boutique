@@ -17,6 +17,7 @@ if(!isset($_SESSION['adress']))
 }
 
 $id_user = $_SESSION['user']->getId();
+
 ?>
 
 <head>
@@ -61,6 +62,8 @@ $id_user = $_SESSION['user']->getId();
                 {
                     $i = $_POST['name-adresses'];
 
+                    $id_adress = $i;
+
                     $one_adress = $_SESSION['adress']->getOneAdress($i);
 
                     foreach($one_adress as $options)
@@ -73,7 +76,7 @@ $id_user = $_SESSION['user']->getId();
                             <label for="adress">Numéro et nom de rue</label></br>
                             <input type="text" name="adress" value="<?php echo $options['adresse']?>" required></br>
                             <label for="zip_code">Code postal</label></br>
-                            <input type="number" name="zip_code" value="<?php echo $options['zip_code']?>" max="5" required></br>
+                            <input type="number" name="zip_code" value="<?php echo $options['zip_code']?>" max="99999" required></br>
                             <label for="city">Ville</label></br>
                             <input type="text" name="city" value="<?php echo $options['city']?>" required></br>
                             <label for="country">Pays</label></br>
@@ -96,7 +99,7 @@ $id_user = $_SESSION['user']->getId();
                         <label for="adress">Numéro et nom de rue</label></br>
                         <input type="text" name="adress" required></br>
                         <label for="zip_code">Code postal</label></br>
-                        <input type="number" name="zip_code" max="5" required></br>
+                        <input type="number" name="zip_code" max="99999" required></br>
                         <label for="city">Ville</label></br>
                         <input type="text" name="city" required></br>
                         <label for="country">Pays</label></br>
@@ -113,16 +116,24 @@ $id_user = $_SESSION['user']->getId();
                     $zip_code = $_POST['zip_code'];
                     $city = $_POST['city'];
                     $country = $_POST['country'];
-                    $id = $option['id'] ;
-                    $_SESSION['adress']->updateAdress($id, $adress, $zip_code, $city, $country,$name_adresse);
+                    $id = $_SESSION['adress']->getIdAdress();
+                    if($_SESSION['adress']->updateAdress($id, $adress, $zip_code, $city, $country,$name_adresse) == "good")
+                    {
                     ?>
                     <span>Votre adresse a été modifiée avec succès</span>
                     <?php
+                    }
+                    else
+                    {
+                        ?>
+                        <span>Une erreur est survenue</span>
+                        <?php
+                    }
                     
                 }
                 if(isset($_POST['delete']))
                 {
-                    $id = $option['id'];
+                    $id = $_SESSION['adress']->getIdAdress();
                     $_SESSION['adress']->deleteAdress($id);
                     ?>
                     <span>Votre adresse à bien été supprimée</span>

@@ -19,7 +19,6 @@ class adress extends bdd{
             $request = $connexion->prepare("SELECT name_adresse FROM adress WHERE name_adresse = '$name_adress' AND id_user = '$id_user'");
             $request->execute();
             $check = $request->rowCount();
-            var_dump($check);
             if($check == 0 )
             {
             $request = $connexion->prepare("INSERT INTO adress (adresse, zip_code, city, country, name_adresse, id_user) VALUES ('$adress' , '$zip_code', '$city', '$country', '$name_adress', '$id_user')");
@@ -52,6 +51,7 @@ class adress extends bdd{
         $request = $connexion->prepare("SELECT * FROM adress WHERE id = '$i'");
         $request->execute();
         $result = $request->fetchAll();
+        $this->id = $i;
         return($result);
     }
 
@@ -68,6 +68,12 @@ class adress extends bdd{
         $connexion = $this->connect();
         $request = $connexion->prepare("DELETE FROM adress WHERE id = '$id'");
         $request->execute();
+    }
+
+    public function getIdAdress()
+    {
+        $id = $this->id;
+        return($id);
     }
 }
 

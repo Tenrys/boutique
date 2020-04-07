@@ -46,7 +46,7 @@ if($_SESSION['user']->getGrade() != "admin")
     <section>
         <h1>Produits</h1>
             <?php
-                include 'products-adm.php';
+                include 'product-adm.php';
             ?>
     </section>
 </main>
