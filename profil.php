@@ -44,6 +44,16 @@ $point = $_SESSION["user"]->getPoints();
 <div>
 <span>Bonjour <?php echo $name[0] ?><br>
         Vous avez actuellement <?php echo $point ?> points</span>
+        <?php
+        if($birthday == true)
+        {
+            ?>
+            <span>Joyeux anniversaire !</span>
+            <?php
+        }
+
+
+        ?>
 </div>
 <div>
     <a href="purchase.php">Vos dernières commandes</a>

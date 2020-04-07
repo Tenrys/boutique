@@ -80,11 +80,10 @@ if($_SESSION['user']->isConnected() != false){
                 if($point >= 100)
                 {
                     if($_SESSION["user"]->register($_POST['lastname'],$_POST["firstname"],$_POST['mail'],$_POST['birthday'], $point, $_POST['password'], $_POST['cpassword'], "membre") == "all good"){
-                        $toto = $_SESSION['user']->register($_POST['lastname'],$_POST["firstname"],$_POST['mail'],$_POST['birthday'], $point, $_POST['password'], $_POST['cpassword'], "membre");
-                        var_dump($toto);
+                        
                         ?>
-                        <!----<span>Vous allez être redirigé vers la page de connexion</span>
-                        <meta http-equiv="refresh" content="5;URL=connexion.php">---->
+                        <span>Vous allez être redirigé vers la page de connexion</span>
+                        <meta http-equiv="refresh" content="5;URL=connexion.php">
                         <?php
                     }
                     elseif($_SESSION["user"]->register($_POST['lastname'],$_POST["firstname"],$_POST['mail'],$_POST['birthday'], $point, $_POST['password'], $_POST['cpassword'], "membre") == "email"){

@@ -2,6 +2,7 @@
 
 require 'class/bdd.php';
 require 'class/user.php';
+require 'class/adm.php';
 
 session_start();
 
@@ -50,7 +51,7 @@ if(isset($_POST["submit"])){
         $_SESSION['mail'] = true;
        if($_SESSION['user']->getGrade() == "admin");
        {
-           $_SESSION['admin'] = true;
+           $_SESSION['admin'] = new admin;
        }
        ?>
         <meta http-equiv="refresh" content="0;URL=index.php">
