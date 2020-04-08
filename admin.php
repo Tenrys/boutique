@@ -22,6 +22,7 @@ if($_SESSION['user']->getGrade() != "admin")
 <head>
         <title>Mon compte</title> 
         <link rel="stylesheet" href="css/style.css">
+        <meta charset="utf-8_decode">
 </head>
 
 

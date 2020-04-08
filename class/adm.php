@@ -5,6 +5,7 @@ class admin extends bdd
     public $id_cat = "";
     public $id_sub_cat = "";
     public $id_product = "";
+    public $img = "";
 
     public function getAllCat()
     {
@@ -27,7 +28,7 @@ class admin extends bdd
     public function getProduct($id_subcat)
     {
         $connexion = $this->connect();
-        $request = $connexion->prepare("SELECT * FROM product WHERE id_subcat = '$id_subcat");
+        $request = $connexion->prepare("SELECT * FROM product WHERE id_subcat = '$id_subcat'");
         $request->execute();
         $result = $request->fetchAll();
         return($result);
@@ -60,6 +61,7 @@ class admin extends bdd
         $request->execute();
         $result = $request->fetchAll();
         $this->id_product = $i;
+        $this->img = $result[0][3];
         return($result);
     }
 
@@ -75,6 +77,14 @@ class admin extends bdd
     {
         $connexion = $this->connect();
         $request = $connexion->prepare("UPDATE sub_category SET name = '$name_subcat', description = '$des_subcat', id_category = '$id_cat' WHERE id = '$id'");
+        $request->execute();
+        return("good");
+    }
+
+    public function updateProduct($id, $name_product, $des_product,$price, $quantity, $id_subcat,$img)
+    {
+        $connexion = $this->connect();
+        $request = $connexion->prepare("UPDATE product SET name = '$name_product', description = '$des_product', img = '$img', price = '$price', quantity = '$quantity', id_subcat = '$id_subcat' WHERE id = '$id'");
         $request->execute();
         return("good");
     }
@@ -95,6 +105,12 @@ class admin extends bdd
     {
         $id = $this->id_product;
         return($id);
+    }
+
+    public function getImgProduct()
+    {
+        $img = $this->img;
+        return($img);
     }
 
     public function deleteCat($id)
@@ -168,6 +184,67 @@ class admin extends bdd
             return "missing";
         }
     }
+
+    public function createProduct($name_pro, $des_pro, $img, $price, $quantity, $date, $id_subcat)
+    {
+        if($name_pro != NULL && $des_pro != NULL && $img != NULL && $price != NULL && $quantity != NULL && $id_subcat != NULL)
+        {
+            $connexion = $this->connect();
+            $request = $connexion->prepare("SELECT name FROM product WHERE name = '$name_pro'");
+            $request->execute();
+            $check = $request->rowCount();
+            if($check == 0 )
+            {
+            $request = $connexion->prepare("INSERT INTO product (name, description, img, price, quantity, date, id_subcat) VALUES ('$name_pro' , '$des_pro', '$img', '$price', '$quantity','$date', '$id_subcat')");
+            $request->execute();
+            return("all good");
+            }
+            else
+            {
+                return("name");
+            }
+        }
+        else
+        {
+            return "missing";
+        }
+    }
+
+    public function insertId($id)
+    {
+        $this->id_product = $id;
+    }
+
+    public function createUrl($id_subcat, $img)
+    {
+        $connexion = $this->connect();
+        $request = $connexion->prepare("SELECT name, id_category FROM sub_category WHERE id = '$id_subcat'");
+        $request->execute();
+        $result = $request->fetchAll();
+        $name_subcat = $result[0]['name'];
+        $namesubcat = explode(" ",$name_subcat);
+        $name_subcat = $namesubcat[0];
+        $id_cat = $result[0]['id_category'];
+        $requete = $connexion->prepare("SELECT name FROM category WHERE id = '$id_cat'");
+        $requete->execute();
+        $resultat = $requete->fetchAll();
+        $name_cat = $resultat[0]['name'];
+        $namecat = explode(" ",$name_cat);
+        $name_cat = $namecat[0];
+        $url = "img/product/".$name_cat."/".$name_subcat."/".$img;
+        $url = mb_strtolower($url);
+        return($url);
+        
+    }
+
+    function sans($url)
+		{
+			$search  = array('À', 'Á', 'Â', 'Ã', 'Ä', 'Å', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ù', 'Ú', 'Û', 'Ü', 'Ý', 'à', 'á', 'â', 'ã', 'ä', 'å', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ð', 'ò', 'ó', 'ô', 'õ', 'ö', 'ù', 'ú', 'û', 'ü', 'ý', 'ÿ');
+			$replace = array('A', 'A', 'A', 'A', 'A', 'A', 'C', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'Y', 'a', 'a', 'a', 'a', 'a', 'a', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'o', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y');
+
+			$url = str_replace($search, $replace, $url);
+			return ($url);
+		}
 
 
 
