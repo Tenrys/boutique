@@ -33,6 +33,7 @@ $birthday = $_SESSION['user']->getBirthday();
 $mail = $_SESSION['user']->getMail();
 $id = $_SESSION['user']->getId();
 
+
 ?>
 <section>
     <h1>Modifier vos informations personnelles</h1>

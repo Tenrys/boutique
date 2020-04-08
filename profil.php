@@ -28,14 +28,16 @@ if(!isset($_SESSION['user'])){
 
 <?php 
 
-
+$birthday = false;
 
 $name = $_SESSION["user"]->getName();
 
 $today = date('Y-m-d');
 
 if(($_SESSION["user"]->getBirthday()) == $today)
-$birthday = true;
+{
+    $birthday = true;
+}
 
 $point = $_SESSION["user"]->getPoints();
 

@@ -99,6 +99,10 @@ class user extends bdd{
                     $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 15));
                     $request = $connexion->prepare("UPDATE user SET lastname = '$lastname', firstname = '$firstname', mail = '$mail', password = '$password', birthday = '$birthday' WHERE id = '$id'");
                     $request->execute();
+                    $this->lastname = $lastname;
+                    $this->firstname = $firstname;
+                    $this->mail = $mail;
+                    $this->birthday = $birthday;
                     return("good");
                 }
                 else
