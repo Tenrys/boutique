@@ -151,6 +151,35 @@ class user extends bdd{
             }
         }
 
+        public function getPurchases($id)
+        {
+            $connexion = $this->connect();
+            $requete = $connexion->prepare("SELECT purchase.id, purchase.price, purchase.means, purchase.date, adress.name_adresse FROM purchase INNER JOIN adress ON purchase.id_adress = adress.id WHERE purchase.id_user = '$id'");
+            $requete->execute();
+            $result = $requete->fetchAll();
+            return($result);
+
+        }
+
+        public function getQuantity($id)
+        {
+            $connexion = $this->connect();
+            $requete = $connexion->prepare("SELECT SUM(quantity) FROM purchase_product WHERE purchase_product.id_purchase
+            = '$id'");
+            $requete->execute();
+            $result = $requete->fetch();
+            return ($result[0]);
+        }
+
+        public function getPurchase_Product($id)
+        {
+            $connexion = $this->connect();
+            $requete = $connexion->prepare("SELECT product.name, product.price, purchase_product.quantity FROM product INNER JOIN purchase_product ON purchase_product.id_product = product.id WHERE purchase_product.id_purchase = '$id'");
+            $requete->execute();
+            $result = $requete->fetchAll();
+            return($result);
+        }
+
         public function getId(){
 
             $id = $this->id;
