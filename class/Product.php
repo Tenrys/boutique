@@ -1,16 +1,18 @@
 <?php
 
-class Product {
-	private int $id;
-	private string $name;
-	private string $description;
-	private string $imagePath;
-	private int $price;
-	private int $quantity;
-	private int $subcategory;
-	private DateTime $date;
+class Product extends Item {
+	protected static string $table = "products";
 
-	const sqlMap = [
+	protected int $id;
+	protected string $name;
+	protected string $description;
+	protected string $imagePath;
+	protected int $price;
+	protected int $quantity;
+	protected int $subcategory;
+	protected DateTime $date;
+
+	const SQLMap = [
 		"imagePath" => "img",
 		"subcategory" => "id_subcategory"
 	];
@@ -35,20 +37,8 @@ class Product {
 	public function getSubcategory() { return $this->subcategory; }
 	public function getDate() { return $this->date; }
 
-	public function toArray() {
-		$arr = [];
-		foreach ($this as $key => $value) {
-			$arr[$key] = $value;
-		}
-		return $arr;
-	}
 	public function forSQL() {
-		$arr = $this->toArray();
-
-		foreach (Product::sqlMap as $from => $to) {
-			$arr[$to] = $arr[$from];
-			unset($arr[$from]);
-		}
+		$arr = parent::forSQL();
 
 		$arr["id_subcategory"] = $arr["id_subcategory"];
 		$arr["date"] = mysql_timestamp($arr["date"]->getTimestamp());

@@ -2,15 +2,8 @@
 
 require "includes/init.php";
 
-$productManager = new ProductManager($db);
-
-$testProduct = new Product([
-	"name" => "Test",
-	"description" => "Test",
-	"price" => 1,
-	"id_subcategory" => 4
-]);
-
-var_dump($productManager->insert($testProduct));
+var_dump(Category::Get([ "name" => "Equipement" ]));
+var_dump(SubCategory::Get([ "name" => "Poisson" ]));
+var_dump(Product::Get([ "name" => "Baie" ]));
 
 ?>

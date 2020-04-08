@@ -9,5 +9,10 @@ require_once "class/Category.php";
 require_once "class/SubCategory.php";
 */
 
+require_once "class/Item.php";
+
+Item::$db = $db;
+
+require_once "class/Category.php";
+require_once "class/SubCategory.php";
 require_once "class/Product.php";
-require_once "class/ProductManager.php";
