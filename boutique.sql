@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 30, 2020 at 11:38 AM
+-- Generation Time: Apr 07, 2020 at 11:46 PM
 -- Server version: 10.4.12-MariaDB
 -- PHP Version: 7.4.4
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `boutique`
 --
-CREATE DATABASE IF NOT EXISTS `boutique` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `boutique`;
 
 -- --------------------------------------------------------
 
@@ -29,7 +27,6 @@ USE `boutique`;
 -- Table structure for table `address`
 --
 
-DROP TABLE IF EXISTS `address`;
 CREATE TABLE `address` (
   `id` int(11) NOT NULL,
   `address` varchar(500) NOT NULL,
@@ -46,7 +43,6 @@ CREATE TABLE `address` (
 -- Table structure for table `categories`
 --
 
-DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -69,7 +65,6 @@ INSERT INTO `categories` (`id`, `name`, `description`) VALUES
 -- Table structure for table `comments`
 --
 
-DROP TABLE IF EXISTS `comments`;
 CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
   `id_product` int(11) NOT NULL,
@@ -85,7 +80,6 @@ CREATE TABLE `comments` (
 -- Table structure for table `products`
 --
 
-DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `name` varchar(140) NOT NULL,
@@ -93,29 +87,30 @@ CREATE TABLE `products` (
   `img` varchar(255) NOT NULL,
   `price` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `id_subcategory` int(11) NOT NULL
+  `id_subcategory` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `description`, `img`, `price`, `quantity`, `id_subcategory`) VALUES
-(1, 'Truite Volt', 'Cette truite fraichement pêchée, ravira vos papilles et vous donneras une défense amélioré contre les attaques électriques !', '../img/products/nourriture/poisson/truite-volt.png', 15, 100, 1),
-(2, 'Venaison', 'Cette viande fraichement chassée seras votre meilleure alliée pour tout vos petits creux !', '../img/products/nourriture/viande/venaison.png', 120, 100, 2),
-(3, 'Champi Armo', 'Ce champignon relèvera vos plats et vous donnera en plus un bonus de défense incroyable', '../img/products/nourriture/champignon/champi-armo.png', 80, 100, 3),
-(4, 'Baie', 'Cette jolie baie gorgée de soleil ravira vos papilles avec sa douceur !', '../img/products/nourriture/autre/baie.png', 50, 100, 4),
-(5, 'Epée de Chevalier', 'Cette épée à deux mains pourfendra vos ennemis sans problème, si vous arrivez à la soulever.', '../img/products/equipement/epee/epee-chevalier.png', 450, 10, 5),
-(6, 'Bouclier du Dieu Bestial', 'Ce bouclier, appartenant autrefois à un Dieu Bestial, sera votre meilleure défense contre n\'importe quel coup asséné par l\'ennemi.', '../img/products/equipement/bouclier/bouclier-dieu-bestial', 5500, 3, 6),
-(7, 'Fourche Electrique', 'Cette fourche électrifiera tous vos ennemis, à manier avec précaution', '../img/products/equipement/lance/fourche-electrique.png', 1200, 5, 7),
-(8, 'Arc Archeonique', 'Cet arc vous permet de viser droit. Extrêmement droit.', '../img/products/equipement/arc/arc-archeonique.png', 3200, 5, 8),
-(9, 'Baguette Electrique', 'Cette baguette électrifiera tous vos ennemis, à manier avec précaution', '../img/products/equipement/divers/baguette-electrique.png', 2300, 2, 9),
-(10, 'Armure de soldat', 'Cette armure vous protégera de beaucoup de coups qui auraient pu être fatal, et vous donneras de la classe par dessus le marché !', '../img/products/vetement/haut/armure-soldat.png', 1500, 4, 10),
-(11, 'Chausses furtives', 'Ces chaussures vous conféreront une furtivité hors paire, personne ne pourra vous entendre !', '../img/products/vetement/pantalon/chausses-furtives.png', 1200, 5, 11),
-(12, 'Bandana d\'escalade', 'Ce bandana vous aidera à escalader plus vite falaises et montagnes !', '../img/products/vetement/coiffes/bandana-escalade', 800, 10, 13),
-(13, 'Filet Apparat', 'Ce filet mettra en valeur le museau de votre animal, vous ne passerez pas inaperçu !', '../img/products/divers/harnachement/filet-apparat.png', 1200, 3, 14),
-(14, 'Ambre brut', 'Cette ambre au magnifique reflets miel vous sera très utile pendant votre aventure !', '../img/products/divers/minerai/ambre-brut.png', 300, 30, 15),
-(15, 'Aile de feu', 'Cette aile de feu est un ingrédient indispensable à toute concoction de remèdes et potions !', '../img/products/divers/ingredients/aile-feu.png', 140, 50, 16);
+INSERT INTO `products` (`id`, `name`, `description`, `img`, `price`, `quantity`, `id_subcategory`, `date`) VALUES
+(1, 'Truite Volt', 'Cette truite fraichement pêchée, ravira vos papilles et vous donneras une défense amélioré contre les attaques électriques !', '../img/products/nourriture/poisson/truite-volt.png', 15, 100, 1, '2020-04-07 23:46:08'),
+(2, 'Venaison', 'Cette viande fraichement chassée seras votre meilleure alliée pour tout vos petits creux !', '../img/products/nourriture/viande/venaison.png', 120, 100, 2, '2020-04-07 23:46:08'),
+(3, 'Champi Armo', 'Ce champignon relèvera vos plats et vous donnera en plus un bonus de défense incroyable', '../img/products/nourriture/champignon/champi-armo.png', 80, 100, 3, '2020-04-07 23:46:08'),
+(4, 'Baie', 'Cette jolie baie gorgée de soleil ravira vos papilles avec sa douceur !', '../img/products/nourriture/autre/baie.png', 50, 100, 4, '2020-04-07 23:46:08'),
+(5, 'Epée de Chevalier', 'Cette épée à deux mains pourfendra vos ennemis sans problème, si vous arrivez à la soulever.', '../img/products/equipement/epee/epee-chevalier.png', 450, 10, 5, '2020-04-07 23:46:08'),
+(6, 'Bouclier du Dieu Bestial', 'Ce bouclier, appartenant autrefois à un Dieu Bestial, sera votre meilleure défense contre n\'importe quel coup asséné par l\'ennemi.', '../img/products/equipement/bouclier/bouclier-dieu-bestial', 5500, 3, 6, '2020-04-07 23:46:08'),
+(7, 'Fourche Electrique', 'Cette fourche électrifiera tous vos ennemis, à manier avec précaution', '../img/products/equipement/lance/fourche-electrique.png', 1200, 5, 7, '2020-04-07 23:46:08'),
+(8, 'Arc Archeonique', 'Cet arc vous permet de viser droit. Extrêmement droit.', '../img/products/equipement/arc/arc-archeonique.png', 3200, 5, 8, '2020-04-07 23:46:08'),
+(9, 'Baguette Electrique', 'Cette baguette électrifiera tous vos ennemis, à manier avec précaution', '../img/products/equipement/divers/baguette-electrique.png', 2300, 2, 9, '2020-04-07 23:46:08'),
+(10, 'Armure de soldat', 'Cette armure vous protégera de beaucoup de coups qui auraient pu être fatal, et vous donneras de la classe par dessus le marché !', '../img/products/vetement/haut/armure-soldat.png', 1500, 4, 10, '2020-04-07 23:46:08'),
+(11, 'Chausses furtives', 'Ces chaussures vous conféreront une furtivité hors paire, personne ne pourra vous entendre !', '../img/products/vetement/pantalon/chausses-furtives.png', 1200, 5, 11, '2020-04-07 23:46:08'),
+(12, 'Bandana d\'escalade', 'Ce bandana vous aidera à escalader plus vite falaises et montagnes !', '../img/products/vetement/coiffes/bandana-escalade', 800, 10, 13, '2020-04-07 23:46:08'),
+(13, 'Filet Apparat', 'Ce filet mettra en valeur le museau de votre animal, vous ne passerez pas inaperçu !', '../img/products/divers/harnachement/filet-apparat.png', 1200, 3, 14, '2020-04-07 23:46:08'),
+(14, 'Ambre brut', 'Cette ambre au magnifique reflets miel vous sera très utile pendant votre aventure !', '../img/products/divers/minerai/ambre-brut.png', 300, 30, 15, '2020-04-07 23:46:08'),
+(15, 'Aile de feu', 'Cette aile de feu est un ingrédient indispensable à toute concoction de remèdes et potions !', '../img/products/divers/ingredients/aile-feu.png', 140, 50, 16, '2020-04-07 23:46:08');
 
 -- --------------------------------------------------------
 
@@ -123,7 +118,6 @@ INSERT INTO `products` (`id`, `name`, `description`, `img`, `price`, `quantity`,
 -- Table structure for table `purchases`
 --
 
-DROP TABLE IF EXISTS `purchases`;
 CREATE TABLE `purchases` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
@@ -139,7 +133,6 @@ CREATE TABLE `purchases` (
 -- Table structure for table `purchases_products`
 --
 
-DROP TABLE IF EXISTS `purchases_products`;
 CREATE TABLE `purchases_products` (
   `id` int(11) NOT NULL,
   `id_purchase` int(11) NOT NULL,
@@ -153,7 +146,6 @@ CREATE TABLE `purchases_products` (
 -- Table structure for table `subcategories`
 --
 
-DROP TABLE IF EXISTS `subcategories`;
 CREATE TABLE `subcategories` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -188,15 +180,21 @@ INSERT INTO `subcategories` (`id`, `name`, `description`, `id_category`) VALUES
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `lastname` varchar(255) NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `rank` varchar(140) NOT NULL
+  `rank` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `lastname`, `firstname`, `email`, `password`, `rank`) VALUES
+(1, 'Maubert', 'Marceau', 'marceau.maubert@laplateforme.io', 'test', 1);
 
 -- --------------------------------------------------------
 
@@ -204,7 +202,6 @@ CREATE TABLE `users` (
 -- Table structure for table `wishlist`
 --
 
-DROP TABLE IF EXISTS `wishlist`;
 CREATE TABLE `wishlist` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
@@ -330,7 +327,7 @@ ALTER TABLE `subcategories`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `wishlist`

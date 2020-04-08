@@ -1,11 +1,16 @@
 <?php
 
-require "init.php";
+require "includes/init.php";
 
 $productManager = new ProductManager($db);
 
-var_dump($productManager->find([
-	"name" => "Baie",
-]))
+$testProduct = new Product([
+	"name" => "Test",
+	"description" => "Test",
+	"price" => 1,
+	"id_subcategory" => 4
+]);
+
+var_dump($productManager->insert($testProduct));
 
 ?>

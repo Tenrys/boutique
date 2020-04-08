@@ -1,22 +1,69 @@
 <?php
 
 class Product {
+	private int $id;
 	private string $name;
 	private string $description;
 	private string $imagePath;
 	private int $price;
 	private int $quantity;
 	private int $subcategory;
+	private DateTime $date;
 
-	function __construct(Array $info) {
-		$this->setName($info["name"]);
-		$this->setDescription($info["description"]);
-		$this->setImagePath($info["img"]);
-		$this->setPrice($info["price"]);
-		$this->setQuantity($info["quantity"]);
-		$this->setSubcategory($info["id_subcategory"]);
+	const sqlMap = [
+		"imagePath" => "img",
+		"subcategory" => "id_subcategory"
+	];
+
+	function __construct(Array $info = []) {
+		$this->setId($info["id"] ?? null);
+		$this->setName($info["name"] ?? "");
+		$this->setDescription($info["description"] ?? "");
+		$this->setImagePath($info["img"] ?? "");
+		$this->setPrice($info["price"] ?? 0);
+		$this->setQuantity($info["quantity"] ?? 1);
+		$this->setSubcategory($info["id_subcategory"] ?? null);
+		$this->setDate($info["date"] ?? new DateTime());
 	}
 
+	public function getId() { return $this->id; }
+	public function getName() { return $this->name; }
+	public function getDescription() { return $this->description; }
+	public function getImagePath() { return $this->imagePath; }
+	public function getPrice() { return $this->price; }
+	public function getQuantity() { return $this->quantity; }
+	public function getSubcategory() { return $this->subcategory; }
+	public function getDate() { return $this->date; }
+
+	public function toArray() {
+		$arr = [];
+		foreach ($this as $key => $value) {
+			$arr[$key] = $value;
+		}
+		return $arr;
+	}
+	public function forSQL() {
+		$arr = $this->toArray();
+
+		foreach (Product::sqlMap as $from => $to) {
+			$arr[$to] = $arr[$from];
+			unset($arr[$from]);
+		}
+
+		$arr["id_subcategory"] = $arr["id_subcategory"];
+		$arr["date"] = mysql_timestamp($arr["date"]->getTimestamp());
+
+		return $arr;
+	}
+
+	public function setId($id = null) {
+		if ($id) {
+			if (!is_numeric($id)) {
+				$id = (int)$id;
+			}
+			$this->id = $id;
+		}
+	}
 	public function setName(string $name) {
 		$this->name = $name;
 	}
@@ -33,6 +80,16 @@ class Product {
 		$this->quantity = $quantity;
 	}
 	public function setSubcategory(int $id) {
-		trigger_error("Product->setSubcategory is not yet implemented", E_USER_WARNING);
+		$this->subcategory = $id;
+		// trigger_error(__METHOD__ . " is not yet implemented", E_USER_WARNING);
+	}
+	public function setDate($date) {
+		if (is_string($date)) {
+			$date = new DateTime($date);
+		}
+		if (!$date instanceof DateTime) {
+			return trigger_error(__METHOD__ . " requires either a valid DateTime string or a DateTime object", E_USER_ERROR);
+		}
+		$this->date = $date;
 	}
 }
