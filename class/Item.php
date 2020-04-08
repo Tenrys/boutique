@@ -8,9 +8,11 @@ class Item {
 
 	public function toArray() {
 		$arr = [];
+
 		foreach ($this as $key => $value) {
 			$arr[$key] = $value;
 		}
+
 		return $arr;
 	}
 	public function forSQL() {
@@ -63,10 +65,11 @@ class Item {
 
 		$sqlArr = $item->forSQL();
 
-		$request = "INSERT INTO " . static::$table . " (" . implode(", ", array_keys($sqlArr)) . ")\nVALUES (" . implode(", ", array_fill(0, count($sqlArr), "?")) . ")";
+		$request = "INSERT INTO " . static::$table . " (" . implode(", ", array_keys($sqlArr)) . ")
+		VALUES (" . implode(", ", array_map(function($key) { return ":$key"; }, array_keys($sqlArr)))  . ")";
 
 		$stmt = self::$db->prepare($request);
-		if ($stmt->execute(array_values($sqlArr))) {
+		if ($stmt->execute($sqlArr)) {
 			if (!$item->getId()) {
 				$item->setId(self::$db->lastInsertId());
 			}
@@ -110,12 +113,12 @@ class Item {
 		$sqlArr = $item->forSQL();
 		$cols = [];
 		foreach($sqlArr as $key => $val) {
-			$cols[] = "$key = ?";
+			$cols[] = "$key = :key";
 		}
-		$request = "UPDATE " . static::$table . " SET " . implode(", ", $cols) . " WHERE id = ?";
+		$request = "UPDATE " . static::$table . " SET " . implode(", ", $cols) . " WHERE id = :id";
 
 		$stmt = self::$db->prepare($request);
-		if ($stmt->execute([...array_values($sqlArr), $item->getId()])) {
+		if ($stmt->execute($sqlArr)) {
 			return true;
 		} else {
 			var_dump($stmt->errorInfo());
