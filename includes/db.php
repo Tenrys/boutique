@@ -7,11 +7,4 @@ if (!isset($_SESSION)) {
 	session_start();
 }
 
-if (!isset($_SESSION["user"]) || !$_SESSION["user"]) {
-	$stmt = $db->prepare("SELECT * FROM users WHERE firstname = 'Marceau'");
-	$stmt->execute();
-	$result = $stmt->fetch();
-	unset($result["password"]);
-	$_SESSION["user"] = $result;
-}
 ?>
