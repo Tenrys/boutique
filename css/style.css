@@ -1,0 +1,203 @@
+/*----------FONTS---------*/
+
+@font-face{
+    font-family: 'Big title';
+    src: url('font/zelda.otf') format('OpenType');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face{
+    font-family: 'Medium title';
+    src: url('font/kg.ttf') format('TrueType');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face{
+    font-family: 'text';
+    src: url('font/louis.ttf') format('TrueType');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face{
+    font-family: 'bold text';
+    src: url('font/louis_bold.ttf') format('TrueType');
+    font-weight: normal;
+    font-style: bold;
+}
+@font-face{
+    font-family: 'italic text';
+    src: url('font/louis_italic.ttf') format('TrueType');
+    font-weight: normal;
+    font-style: italic;
+}
+/*--------------GENERAL---------*/
+body{
+    height:auto;
+    width: 100%;
+    display: flex;
+    margin : 0;
+    padding : 0;
+    flex-direction: column;
+    background-image: url('../img/style/909546.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+.main{
+    background-color: rgba(255, 255, 255, 0.5);
+    width : 80%;
+    margin-left : auto;
+    margin-right: auto;
+    display: block;
+}
+
+/*--------------HEADER----------*/
+
+header{
+    height: 20%;
+    width : 100%;
+    margin-bottom: 3%;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+#dc {
+    background-color: #155869;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-family: 'Medium title';
+    font-size : 120%;
+}
+
+#banner{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width : 100%;
+}
+
+#connexion{
+    display: block;
+    padding-right: 2%;;
+}
+
+a.button{
+    display:inline-block;
+    padding:0.35em 1.2em;
+    border:0.1em solid #155869;
+    margin:0 0.3em 0.3em 0;
+    border-radius:0.12em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'medium title';
+    font-size: 120%;
+    color:#155869;
+    text-align:center;
+    transition: all 0.2s;
+}
+
+a.button:hover{
+    color:rgb(255, 255, 255);
+    background-color:#155869;
+}
+
+/*-----------NAV------------*/
+#header{
+    background-color: #155869;
+    display: block;
+    height: 12%;
+}
+
+#menu, #menu ul {
+    padding:0;
+    margin:0;
+    list-style: none;
+    text-align: center;
+    background-color: #155869;
+  }
+
+  #menu li {
+    display:inline-block;
+    vertical-align: top;
+    position: relative;
+  }
+  #menu li li {
+    display:inherit;
+  }
+  #menu ul li a{
+    width: 160px;
+  }
+  #menu a {
+    display:block;
+    padding:5px 50px;
+    text-decoration: none;
+    color:#fff;
+  }
+  
+  #menu ul li a {
+    padding:5px 8px;
+  }
+  #menu ul {
+    position: absolute;
+    z-index: 1000;
+    min-width:100%;
+    white-space: nowrap;
+    text-align: left;
+  }
+  #menu ul ul {
+    left:100%;
+    top:0;
+    overflow: hidden;
+    max-width: 0;
+    min-width: 0;
+    transition: 0.3s all;
+  }
+  #menu ul li:hover ul {
+    max-width: 50em;
+  }
+  #menu ul li {
+    max-height:0;
+    overflow: hidden;
+    transition:all 0.8s;
+  }
+  #menu li li li {
+    max-height: inherit;
+  }
+  #menu li:hover li {
+    max-height: 15em;
+    overflow: visible;
+  }
+#nav{
+    height: 120%;
+}
+.title-header{
+    font-family: 'Medium title';
+    font-size: 200%;
+}
+
+nav{
+    height: 120%;
+}
+.name-header{
+    font-family : 'text';
+    font-size: 120%;
+}
+.sub{
+    background-color: #088EA7;
+}
+.nav-sub{
+    background-color: #00A0BA;
+}
+
+/*------------TITLE-----------*/
+
+.title{
+    font-family: 'Big title';
+    font-size : 500%;
+    padding-left: 1%;
+}

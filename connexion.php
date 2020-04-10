@@ -27,9 +27,9 @@ if($_SESSION['user']->isConnected() != false){
 </head>
 
 <body>
-
-<main>
 <?php require 'include/header.php'?>
+
+<main class="main">
 <h1> Connexion </h1>
 
 
