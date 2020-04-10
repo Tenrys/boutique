@@ -26,4 +26,8 @@ class SubCategory extends ShopItem {
 	public function setCategory($category) { $this->category = Category::Get($category); }
 	public function setName(string $name) { $this->name = $name; }
 	public function setDescription(string $description) { $this->description = $description; }
+
+	public function getProducts() {
+		return Product::Find(["id_subcategory" => $this->getId()]);
+	}
 }

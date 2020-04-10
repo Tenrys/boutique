@@ -45,6 +45,13 @@ class Item {
 		return self::$db instanceof PDO && is_string(static::$table);
 	}
 
+	public static function Query(string $request, Array $data = []) {
+		$stmt = self::$db->prepare($request);
+		$success = $stmt->execute($data);
+		$result = $stmt->fetchAll();
+		return [$success, $result];
+	}
+
 	public static function Find(Array $data = []) {
 		if (!static::Ready()) return;
 
@@ -63,9 +70,7 @@ class Item {
 			}
 		}
 
-		$stmt = self::$db->prepare($request);
-		$stmt->execute($data);
-		$result = $stmt->fetchAll();
+		[$success, $result] = self::Query($request, $data);
 		if (is_array($result)) {
 			foreach ($result as $key => $value) {
 				$result[$key] = new static($value);
@@ -79,7 +84,7 @@ class Item {
 		$result = static::Find($data);
 		if ($result) $result = $result[0];
 
-		return $result ?? false;
+		return is_array($result) ? null : $result;
 	}
 
 	public static function Insert(self &$item) {
@@ -94,8 +99,8 @@ class Item {
 		$request = "INSERT INTO " . static::$table . " (" . implode(", ", array_keys($sqlArr)) . ")
 		VALUES (" . implode(", ", array_map(function($key) { return ":$key"; }, array_keys($sqlArr)))  . ")";
 
-		$stmt = self::$db->prepare($request);
-		if ($stmt->execute($sqlArr)) {
+		[$success, $result] = self::Query($request, $sqlArr);
+		if ($success) {
 			if (!$item->getId()) {
 				$item->setId(self::$db->lastInsertId());
 			}
@@ -119,8 +124,8 @@ class Item {
 
 		$request = "DELETE FROM " . static::$table . " WHERE id = ?";
 
-		$stmt = self::$db->prepare($request);
-		if ($stmt->execute([$item->getId()])) {
+		[$success, $result] = self::Query($request, [$item->getId()]);
+		if ($success) {
 			$item = null;
 			return true;
 		} else {
@@ -147,8 +152,8 @@ class Item {
 		}
 		$request = "UPDATE " . static::$table . " SET " . implode(", ", $cols) . " WHERE id = :id";
 
-		$stmt = self::$db->prepare($request);
-		if ($stmt->execute($sqlArr)) {
+		[$success, $result] = self::Query($request, $sqlArr);
+		if ($success) {
 			return true;
 		} else {
 			var_dump($stmt->errorInfo());

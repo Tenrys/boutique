@@ -31,9 +31,9 @@ if (isset($_POST["login"])) {
             <h1>Connexion</h1>
 
             <section class="section">
-<?php           if (isset($message)) { ?>
+                <?php if (isset($message)) { ?>
                     <p class="error"><?= $message ?></p>
-<?php           } ?>
+                <?php } ?>
                 <form class="formulaire" method="post">
                     <label for="email">E-mail</label>
                     <input type="email" name="email" required>

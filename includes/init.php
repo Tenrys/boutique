@@ -15,6 +15,7 @@ require_once("classes/Address.php");
 require_once("classes/Category.php");
 require_once("classes/SubCategory.php");
 require_once("classes/Product.php");
+require_once("classes/Comment.php");
 
 require_once("classes/WishList.php");
 require_once("classes/Purchase.php");

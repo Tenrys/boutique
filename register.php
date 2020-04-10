@@ -27,13 +27,13 @@ if (isset($_POST["register"])) {
         <main>
             <h1>Inscription</h1>
 
-<?php       if (isset($success) && $success) { ?>
+            <?php if (isset($success) && $success) { ?>
                 <p>Inscription réussie !<p>
                 <p>Vous allez être redirigé vers la page de connexion...</p>
-<?php       } else {
+            <?php } else {
                 if (isset($message)) { ?>
                     <p class="error"><?= $message ?></p>
-<?php           } ?>
+                <?php } ?>
                 <form class="formulaire" method="post">
                     <label for="lastname">Nom</label>
                     <input type="text" name="lastname" required value="<?= $_POST['lastname'] ?? '' ?>">
@@ -55,7 +55,7 @@ if (isset($_POST["register"])) {
                     <br>
                     <input type="submit" name="register" value="S'inscrire">
                 </form>
-<?php       } ?>
+            <?php } ?>
         </main>
 
         <?php require("includes/footer.php") ?>

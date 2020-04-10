@@ -17,6 +17,7 @@ die;
     </head>
     <body>
         <?php require("includes/header.php") ?>
+
         <main>
 
         </main>
