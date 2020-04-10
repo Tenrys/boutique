@@ -13,11 +13,11 @@ class WishList extends ShopItem {
 		"product" => "id_product"
 	];
 
-	function __construct(Array $info = []) {
-		parent::__construct($info);
+	function __construct(Array $data = []) {
+		parent::__construct($data);
 
-		$this->setUser($info["id_user"] ?? null);
-		$this->setProduct($info["id_product"] ?? null);
+		$this->setUser($data["id_user"] ?? null);
+		$this->setProduct($data["id_product"] ?? null);
 	}
 
 	public function getUser() { return $this->user; }

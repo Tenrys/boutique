@@ -3,7 +3,6 @@
 class Purchase extends ShopItem {
 	protected static string $table = "purchases";
 
-	protected int $id;
 	protected User $user;
 	protected Address $address;
 	protected int $price;
@@ -15,14 +14,14 @@ class Purchase extends ShopItem {
 		"address" => "id_address"
 	];
 
-	function __construct(Array $info = []) {
-		parent::__construct($info);
+	function __construct(Array $data = []) {
+		parent::__construct($data);
 
-		$this->setUser($info["id_user"] ?? null);
-		$this->setAddress($info["id_address"] ?? null);
-		$this->setPrice($info["price"] ?? 0);
-		$this->setDate($info["date"] ?? new DateTime());
-		$this->setMethod($info["method"] ?? "");
+		$this->setUser($data["id_user"] ?? null);
+		$this->setAddress($data["id_address"] ?? null);
+		$this->setPrice($data["price"] ?? 0);
+		$this->setDate($data["date"] ?? new DateTime());
+		$this->setMethod($data["method"] ?? "");
 	}
 
 	public function getUser() { return $this->user; }

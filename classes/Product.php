@@ -16,16 +16,16 @@ class Product extends ShopItem {
 		"subcategory" => "id_subcategory"
 	];
 
-	function __construct(Array $info = []) {
-		parent::__construct($info);
+	function __construct(Array $data = []) {
+		parent::__construct($data);
 
-		$this->setName($info["name"] ?? "");
-		$this->setDescription($info["description"] ?? "");
-		$this->setImagePath($info["img"] ?? "");
-		$this->setPrice($info["price"] ?? 0);
-		$this->setQuantity($info["quantity"] ?? 1);
-		$this->setSubcategory($info["id_subcategory"] ?? null);
-		$this->setDate($info["date"] ?? new DateTime());
+		$this->setName($data["name"] ?? "");
+		$this->setDescription($data["description"] ?? "");
+		$this->setImagePath($data["img"] ?? "");
+		$this->setPrice($data["price"] ?? 0);
+		$this->setQuantity($data["quantity"] ?? 1);
+		$this->setSubcategory($data["id_subcategory"] ?? null);
+		$this->setDate($data["date"] ?? new DateTime());
 	}
 
 	public function getName() { return $this->name; }

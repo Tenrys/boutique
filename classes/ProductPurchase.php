@@ -12,12 +12,12 @@ class ProductPurchase extends ShopItem {
 		"product" => "id_product"
 	];
 
-	function __construct(Array $info = []) {
-		parent::__construct($info);
+	function __construct(Array $data = []) {
+		parent::__construct($data);
 
-		$this->setPurchase($info["id_user"] ?? null);
-		$this->setProduct($info["id_product"] ?? null);
-		$this->setQuantity($info["quantity"] ?? 0);
+		$this->setPurchase($data["id_user"] ?? null);
+		$this->setProduct($data["id_product"] ?? null);
+		$this->setQuantity($data["quantity"] ?? 0);
 	}
 
 	public function getPurchase() { return $this->purchase; }

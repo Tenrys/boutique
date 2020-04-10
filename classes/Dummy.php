@@ -5,12 +5,12 @@
 class Dummy extends ShopItem {
 	protected static string $table = "";
 
-	protected static Array $sqlMap = [
+	protected static Array $sqlMap = [ // When Dummy->forSQL is called, property "from" will be renamed to "to"
 		"from" => "to"
 	];
 
-	function __construct(Array $info = []) {
-		parent::__construct($info);
+	function __construct(Array $data = []) {
+		parent::__construct($data);
 	}
 }
 

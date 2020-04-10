@@ -15,15 +15,15 @@ class Address extends ShopItem {
 		"user" => "id_user"
 	];
 
-	function __construct(Array $info = []) {
-		parent::__construct($info);
+	function __construct(Array $data = []) {
+		parent::__construct($data);
 
-		$this->setUser($info["id_user"] ?? null);
-		$this->setName($info["name"] ?? "");
-		$this->setAddress($info["address"] ?? "");
-		$this->setZipCode($info["zip_code"] ?? 0);
-		$this->setCity($info["city"] ?? "");
-		$this->setCountry($info["country"] ?? "");
+		$this->setUser($data["id_user"] ?? null);
+		$this->setName($data["name"] ?? "");
+		$this->setAddress($data["address"] ?? "");
+		$this->setZipCode($data["zip_code"] ?? 0);
+		$this->setCity($data["city"] ?? "");
+		$this->setCountry($data["country"] ?? "");
 	}
 
 	public function getUser() { return $this->user; }

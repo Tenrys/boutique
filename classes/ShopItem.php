@@ -1,26 +1,26 @@
 <?php
 
 class ShopItem extends Item {
-	protected int $id;
+	protected ?int $id = null;
 
-	public static function Get($info) {
+	public static function Get($data) {
 		$shopItem;
-		if ($info instanceof static) {
-			$shopItem = $info;
-		} elseif (is_numeric($info)) {
-			$shopItem = parent::Get(["id" => $info]);
-		} elseif (is_array($info)) {
-			$shopItem = parent::Get($info);
+		if ($data instanceof static) {
+			$shopItem = $data;
+		} elseif (is_numeric($data)) {
+			$shopItem = parent::Get(["id" => $data]);
+		} elseif (is_array($data)) {
+			$shopItem = parent::Get($data);
 		}
-		if (!$shopItem) {
+		if (!isset($shopItem)) {
 			$class = get_called_class();
 			throw new InvalidArgumentException(__METHOD__ . " requires either a $class, a $class ID or an Array of information to look up");
 		}
 		return $shopItem;
 	}
 
-	public function __construct(Array $info) {
-		$this->setId($info["id"] ?? null);
+	public function __construct(Array $data) {
+		$this->setId($data["id"] ?? null);
 	}
 
 	public function getId() { return $this->id; }

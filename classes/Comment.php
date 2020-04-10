@@ -14,14 +14,14 @@ class Comment extends ShopItem {
 		"user" => "id_user"
 	];
 
-	function __construct(Array $info = []) {
-		parent::__construct($info);
+	function __construct(Array $data = []) {
+		parent::__construct($data);
 
-		$this->setUser($info["id_user"] ?? null);
-		$this->setProduct($info["id_product"] ?? null);
-		$this->setMessage($info["message"] ?? "");
-		$this->setRating($info["rating"] ?? 0);
-		$this->setDate($info["date"] ?? new DateTime());
+		$this->setUser($data["id_user"] ?? null);
+		$this->setProduct($data["id_product"] ?? null);
+		$this->setMessage($data["message"] ?? "");
+		$this->setRating($data["rating"] ?? 0);
+		$this->setDate($data["date"] ?? new DateTime());
 	}
 
 	public function getUser() { return $this->user; }

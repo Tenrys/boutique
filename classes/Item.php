@@ -45,18 +45,18 @@ class Item {
 		return self::$db instanceof PDO && is_string(static::$table);
 	}
 
-	public static function Find(Array $info = []) {
+	public static function Find(Array $data = []) {
 		if (!static::Ready()) return;
 
 		$request = "SELECT * FROM " . static::$table;
-		if (count($info) > 1) {
+		if (count($data) > 0) {
 			$request .= " WHERE\n";
 			$i = 0;
-			foreach ($info as $key => $_) {
+			foreach ($data as $key => $_) {
 				if (is_string($key)) {
 					$request .= "$key = :$key";
 					$i++;
-					if ($i < count($info)) {
+					if ($i < count($data)) {
 						$request .= " AND \n";
 					}
 				}
@@ -64,7 +64,7 @@ class Item {
 		}
 
 		$stmt = self::$db->prepare($request);
-		$stmt->execute($info);
+		$stmt->execute($data);
 		$result = $stmt->fetchAll();
 		if (is_array($result)) {
 			foreach ($result as $key => $value) {
@@ -75,8 +75,8 @@ class Item {
 		return $result;
 	}
 
-	public static function Get(Array $info) {
-		$result = static::Find($info);
+	public static function Get(Array $data) {
+		$result = static::Find($data);
 		if ($result) $result = $result[0];
 
 		return $result ?? false;

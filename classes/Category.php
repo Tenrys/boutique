@@ -6,11 +6,11 @@ class Category extends ShopItem {
 	protected string $name;
 	protected string $description;
 
-	function __construct(Array $info = []) {
-		parent::__construct($info);
+	function __construct(Array $data = []) {
+		parent::__construct($data);
 
-		$this->setName($info["name"] ?? "");
-		$this->setDescription($info["description"] ?? "");
+		$this->setName($data["name"] ?? "");
+		$this->setDescription($data["description"] ?? "");
 	}
 
 	public function getName() { return $this->name; }

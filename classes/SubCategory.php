@@ -11,12 +11,12 @@ class SubCategory extends ShopItem {
 		"category" => "id_category",
 	];
 
-	function __construct(Array $info = []) {
-		parent::__construct($info);
+	function __construct(Array $data = []) {
+		parent::__construct($data);
 
-		$this->setName($info["name"] ?? "");
-		$this->setDescription($info["description"] ?? "");
-		$this->setCategory($info["id_category"] ?? null);
+		$this->setName($data["name"] ?? "");
+		$this->setDescription($data["description"] ?? "");
+		$this->setCategory($data["id_category"] ?? null);
 	}
 
 	public function getName() { return $this->name; }

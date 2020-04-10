@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2020 at 11:46 PM
+-- Generation Time: Apr 10, 2020 at 01:38 AM
 -- Server version: 10.4.12-MariaDB
 -- PHP Version: 7.4.4
 
@@ -20,20 +20,23 @@ SET time_zone = "+00:00";
 --
 -- Database: `boutique`
 --
+CREATE DATABASE IF NOT EXISTS `boutique` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `boutique`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `address`
+-- Table structure for table `addresses`
 --
 
-CREATE TABLE `address` (
+DROP TABLE IF EXISTS `addresses`;
+CREATE TABLE `addresses` (
   `id` int(11) NOT NULL,
   `address` varchar(500) NOT NULL,
   `zip_code` int(11) NOT NULL,
   `city` varchar(140) NOT NULL,
   `country` varchar(140) NOT NULL,
-  `name_address` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -43,6 +46,7 @@ CREATE TABLE `address` (
 -- Table structure for table `categories`
 --
 
+DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -65,11 +69,12 @@ INSERT INTO `categories` (`id`, `name`, `description`) VALUES
 -- Table structure for table `comments`
 --
 
+DROP TABLE IF EXISTS `comments`;
 CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
   `id_product` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `date` timestamp NOT NULL DEFAULT current_timestamp(),
   `message` varchar(500) NOT NULL,
   `rating` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -80,13 +85,14 @@ CREATE TABLE `comments` (
 -- Table structure for table `products`
 --
 
+DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `name` varchar(140) NOT NULL,
-  `description` varchar(500) NOT NULL,
-  `img` varchar(255) NOT NULL,
+  `description` varchar(500) NOT NULL DEFAULT '',
+  `img` varchar(255) NOT NULL DEFAULT '',
   `price` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL DEFAULT 1,
   `id_subcategory` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -118,12 +124,13 @@ INSERT INTO `products` (`id`, `name`, `description`, `img`, `price`, `quantity`,
 -- Table structure for table `purchases`
 --
 
+DROP TABLE IF EXISTS `purchases`;
 CREATE TABLE `purchases` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `id_address` int(11) NOT NULL,
   `price` int(11) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `date` timestamp NOT NULL DEFAULT current_timestamp(),
   `method` varchar(140) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -133,6 +140,7 @@ CREATE TABLE `purchases` (
 -- Table structure for table `purchases_products`
 --
 
+DROP TABLE IF EXISTS `purchases_products`;
 CREATE TABLE `purchases_products` (
   `id` int(11) NOT NULL,
   `id_purchase` int(11) NOT NULL,
@@ -146,6 +154,7 @@ CREATE TABLE `purchases_products` (
 -- Table structure for table `subcategories`
 --
 
+DROP TABLE IF EXISTS `subcategories`;
 CREATE TABLE `subcategories` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -180,21 +189,23 @@ INSERT INTO `subcategories` (`id`, `name`, `description`, `id_category`) VALUES
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `lastname` varchar(255) NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `rank` int(11) NOT NULL
+  `rank` int(11) NOT NULL DEFAULT 0,
+  `birthday` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `lastname`, `firstname`, `email`, `password`, `rank`) VALUES
-(1, 'Maubert', 'Marceau', 'marceau.maubert@laplateforme.io', 'test', 1);
+INSERT INTO `users` (`id`, `lastname`, `firstname`, `email`, `password`, `rank`, `birthday`) VALUES
+(6, 'Maubert', 'Marceau', 'marceau.maubert@laplateforme.io', '$2y$10$5JgkMXSWFeJvfscNFIKr0Oow9kq9N.lZj9Chcve7LR33AdFSZrXTS', 0, '1999-11-14 23:00:00');
 
 -- --------------------------------------------------------
 
@@ -202,6 +213,7 @@ INSERT INTO `users` (`id`, `lastname`, `firstname`, `email`, `password`, `rank`)
 -- Table structure for table `wishlist`
 --
 
+DROP TABLE IF EXISTS `wishlist`;
 CREATE TABLE `wishlist` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
@@ -213,9 +225,9 @@ CREATE TABLE `wishlist` (
 --
 
 --
--- Indexes for table `address`
+-- Indexes for table `addresses`
 --
-ALTER TABLE `address`
+ALTER TABLE `addresses`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_user` (`id_user`) USING BTREE;
 
@@ -282,10 +294,10 @@ ALTER TABLE `wishlist`
 --
 
 --
--- AUTO_INCREMENT for table `address`
+-- AUTO_INCREMENT for table `addresses`
 --
-ALTER TABLE `address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `addresses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -303,7 +315,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `purchases`
@@ -327,7 +339,7 @@ ALTER TABLE `subcategories`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `wishlist`
@@ -340,10 +352,10 @@ ALTER TABLE `wishlist`
 --
 
 --
--- Constraints for table `address`
+-- Constraints for table `addresses`
 --
-ALTER TABLE `address`
-  ADD CONSTRAINT `address_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `addresses`
+  ADD CONSTRAINT `addresses_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `comments`
@@ -363,7 +375,7 @@ ALTER TABLE `products`
 --
 ALTER TABLE `purchases`
   ADD CONSTRAINT `purchases_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `purchases_ibfk_2` FOREIGN KEY (`id_address`) REFERENCES `address` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `purchases_ibfk_2` FOREIGN KEY (`id_address`) REFERENCES `addresses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `purchases_products`
