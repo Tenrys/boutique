@@ -35,21 +35,21 @@ $id = $_SESSION['user']->getId();
 
 
 ?>
-<section>
-    <h1>Modifier vos informations personnelles</h1>
-<form method="post" action="profil-client.php">
+<section class="bloc">
+    <h1 class="title_medium">Modifier vos informations personnelles</h1>
+<form method="post" action="profil-client.php" class="form">
 
-            <label for="lastname">Nom</label>
-            <input type="text" name="lastname" value="<?php echo $name[0]?>"><br>
-            <label for="firstname">Prénom</label>
-            <input type="text" name="firstname" value="<?php echo $name[1]?>"><br>
-            <label for="mail">Email</label>
-            <input type="email" name="mail" value="<?php echo $mail?>"><br>
-            <label for="birthday">Anniversaire</label>
-            <input type="date" name="birthday" value="<?php echo $birthday?>"></br>
-            <label for="password">Mot de passe actuel</label>
-            <input type="password" name="password" required><br>
-            <input type="submit" name="update" value="Modifier">
+            <label class="label" for="lastname">Nom</label>
+            <input class="input" type="text" name="lastname" value="<?php echo $name[0]?>"><br>
+            <label class="label" for="firstname">Prénom</label>
+            <input class="input" type="text" name="firstname" value="<?php echo $name[1]?>"><br>
+            <label class="label" for="mail">Email</label>
+            <input class="input" type="email" name="mail" value="<?php echo $mail?>"><br>
+            <label class="label" for="birthday">Anniversaire</label>
+            <input class="input" type="date" name="birthday" value="<?php echo $birthday?>"></br>
+            <label class="label" for="password">Mot de passe actuel</label>
+            <input class="input" type="password" name="password" required><br>
+            <input class="button_form" type="submit" name="update" value="Modifier">
 
 </form>
 </section>
@@ -65,30 +65,36 @@ if(isset($_POST['update']))
         $password = $_POST['password'];
         if($_SESSION['user']->update($id, $lastname, $firstname, $mail, $birthday, $password) == "good")
         {
-            echo "vos données ont étées mises à jour";
+           ?>
+           <span class="alert">Vos données ont étées mises à jour</span>
+           <?php
         }
         else if ($_SESSION['user']->update($id, $lastname, $firstname, $mail, $birthday, $password) == "mail")
         {
-            echo 'cet email est déjà utilisé';
+            ?>
+            <span class="alert">Cet email est déjà utilisé</span>
+            <?php
         }
     }
     else
     {
-        echo "vous devez renseigner votre mot de passe actuel";
+        ?>
+        <span class="alert">Veuillez renseigner votre mot de passe</span>
+        <?php
     }
 }
 
 ?>
-<section>
-<h1>Modifier votre mot de passe</h1>
-<form method="post" action="profil-client.php">
-    <label for="oldpassword">Votre mot de passe actuel</label>
-    <input type="password" name="oldpassword"></br>
-    <label for="newpassword">Votre nouveau mot de passe</label>
-    <input type="password" name="newpassword"></br>
-    <label for="cnewpassword">Confirmez votre nouveau mot de passe</label>
-    <input type="password" name="cnewpassword"></br>
-    <input type="submit" name="updatepassword" value="Modifier">
+<section class="bloc">
+<h1 class="title_medium">Modifier votre mot de passe</h1>
+<form method="post" action="profil-client.php" class="form">
+    <label class="label" for="oldpassword">Votre mot de passe actuel</label>
+    <input class="input" type="password" name="oldpassword"></br>
+    <label class="label" for="newpassword">Votre nouveau mot de passe</label>
+    <input class="input" type="password" name="newpassword"></br>
+    <label class="label" for="cnewpassword">Confirmez votre nouveau mot de passe</label>
+    <input class="input" type="password" name="cnewpassword"></br>
+    <input class="button_form" type="submit" name="updatepassword" value="Modifier">
 
 </form>
 </section>
@@ -101,28 +107,36 @@ if(isset($_POST['updatepassword']))
 
     if($_SESSION['user']->updatePassword($id, $oldpassword, $newpassword, $cnewpassword) == "very good")
     {
-        echo "votre mot de passe a été modifié";
+        ?>
+        <span class="alert">Votre mot de passe a été modifié</span>
+        <?php
     }
     else if($_SESSION['user']->updatePassword($id, $oldpassword, $newpassword, $cnewpassword) == "oldmdp")
     {
-        echo "votre mot de passe actuel est incorrect";
+        ?>
+        <span class="alert">Votre mot de passe actuel est incorrect</span>
+        <?php
     }
     else if($_SESSION['user']->updatePassword($id, $oldpassword, $newpassword, $cnewpassword) == "match")
     {
-        echo "votre nouveau mot de passe et votre confirmation de mot de passe sont différents";
+        ?>
+        <span class="alert">Votre nouveau mot de passe et votre confirmation de mot de passe sont différents</span>
+        <?php
     }
     else if($_SESSION['user']->updatePassword($id, $oldpassword, $newpassword, $cnewpassword) == "missing")
     {
-        echo "veuillez renseigner les informations demandées";
+        ?>
+        <span class="alert">Veuillez renseigner les informations demandées</span>
+        <?php
     }
 }
 
 ?>
-<section>
-    <h1>Supprimer votre compte</h1>
-    <span>Attention, cette action est irréversible</span>
-    <form method="post">
-    <input type="submit" name="delete" value="Supprimer">
+<section class="bloc">
+    <h1 class="title_medium">Supprimer votre compte</h1>
+    <span class="alert">Attention, cette action est irréversible</span>
+    <form class="form" method="post">
+    <input class="button_form" type="submit" name="delete" value="Supprimer">
     </form>
 </section>
 <?php

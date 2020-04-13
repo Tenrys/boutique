@@ -12,7 +12,7 @@ define('HTTP_ROOT', 'localhost' == $_SERVER['HTTP_HOST'] ? '/boutique/' : '/');
     {
     ?>
     <form action="<?= HTTP_ROOT ?>index.php" method="post" class="deconnexion">
-	               <input id="dc" name="deconnexion" value="Se déconnecter" type="submit" />
+	               <input class="button" name="deconnexion" value="Se déconnecter" type="submit" />
             </form>
 				
 		<?php

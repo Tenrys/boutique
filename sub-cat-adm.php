@@ -3,9 +3,9 @@
     $subcat = $_SESSION['admin']->getAllSub_cat();
 ?>
         <form action="" method="post">
-                    <label for="subcat-select">Choisissez une sous-catégorie à modifier:</label>
+                    <label class="label" for="subcat-select">Choisissez une sous-catégorie à modifier:</label>
 
-                        <select name="subcat-select">
+                        <select class="select" name="subcat-select">
                             <?php
                         foreach($subcat as $sub)
                         {
@@ -17,7 +17,7 @@
                             <option value="add-sub">Ajouter une sous-catégorie</option>
                     
                         </select>
-                        <input type="submit" name="choose-sub">
+                        <input class="button_form" type="submit" name="choose-sub">
                     </form>
                     <?php
 
@@ -34,12 +34,12 @@
             ?>
             <section>
                 <form action="" method="post">
-                    <label for="name_subcat">Nom de la sous-catégorie</label>
-                    <input type="text" name="name_subcat" value="<?php echo $subs['name']?>">
-                    <label for="des_subcat">Description de la sous-catégorie</label>
-                    <textarea name="des_subcat"  rows="5" cols="33"><?php echo $subs['description']?></textarea>
-                    <label for="id_category">Catégorie propriétaire</label>
-                    <select name="id_category">
+                    <label class="label" for="name_subcat">Nom de la sous-catégorie</label>
+                    <input class="input" type="text" name="name_subcat" value="<?php echo $subs['name']?>">
+                    <label class="label" for="des_subcat">Description de la sous-catégorie</label>
+                    <textarea class="input" name="des_subcat"  rows="5" cols="33"><?php echo $subs['description']?></textarea>
+                    <label class="label" for="id_category">Catégorie propriétaire</label>
+                    <select class="select" name="id_category">
                     <?php
                     foreach($category as $cat)
                         {
@@ -55,8 +55,8 @@
                         }
                     ?>
                     </select>
-                    <input type="submit" name="update_sub" value="Modifier cette sous-catégorie">
-                    <input type="submit" name="delete_sub" value="Supprimer cette sous-catégorie">
+                    <input class="button_form" type="submit" name="update_sub" value="Modifier cette sous-catégorie">
+                    <input class="button_form" type="submit" name="delete_sub" value="Supprimer cette sous-catégorie">
                 </form> 
             </section>
             <?php
@@ -69,12 +69,12 @@
         ?>
         <section>
             <form action="" method="post">
-                    <label for="name_subcat">Nom de la sous-catégorie</label>
-                    <input type="text" name="name_subcat" required>
-                    <label for="des_subcat">Description de la sous-catégorie</label>
-                    <textarea name="des_subcat"  rows="5" cols="33" required></textarea>
-                    <label for="id_category">Catégorie propriétaire</label>
-                    <select name="id_category">
+                    <label class="label" for="name_subcat">Nom de la sous-catégorie</label>
+                    <input class="input" type="text" name="name_subcat" required>
+                    <label class="label" for="des_subcat">Description de la sous-catégorie</label>
+                    <textarea class="input" name="des_subcat"  rows="5" cols="33" required></textarea>
+                    <label class="label" for="id_category">Catégorie propriétaire</label>
+                    <select class="select" name="id_category">
                     <?php
                     foreach($category as $cat)
                         {
@@ -86,7 +86,7 @@
                         }
                     ?>
                     </select>
-                    <input type="submit" name="create_sub" value="Ajouter une sous-catégorie">
+                    <input class="button_form" type="submit" name="create_sub" value="Ajouter une sous-catégorie">
             </form>
         </section>
         <?php
@@ -100,13 +100,13 @@
         if($_SESSION['admin']->updateSub_Cat($id,$name_subcat,$des_subcat,$id_cat) == "good")
         {
         ?>
-        <span>Votre sous-catégorie a bien été mofidiée</span>
+        <span class="alert">Votre sous-catégorie a bien été mofidiée</span>
         <?php
         }
         else
         {
             ?>
-            <span>Une erreur est survenue</span>
+            <span class="alert">Une erreur est survenue</span>
             <?php
         }
     }
@@ -115,7 +115,7 @@
         $id = $_SESSION['admin']->getIdSub_Cat();
         $_SESSION['admin']->deleteSub_Cat($id);
         ?>
-        <span>La sous-catégorie a été supprimée</span>
+        <span class="alert">La sous-catégorie a été supprimée</span>
         <?php
 
     }
@@ -128,19 +128,19 @@
         if($_SESSION['admin']->createSub_Cat($name_subcat,$des_subcat,$id_cat) == "all good" )
         {
             ?>
-            <span>La sous-catégorie a été ajoutée</span>
+            <span class="alert">La sous-catégorie a été ajoutée</span>
             <?php
         }
         else if($_SESSION['admin']->createSub_Cat($name_subcat,$des_subcat,$id_cat) == "name" )
         {
             ?>
-            <span>Une sous-catégorie existante porte déjà ce nom</span>
+            <span class="alert">Une sous-catégorie existante porte déjà ce nom</span>
             <?php
         }
         else if($_SESSION['admin']->createSub_Cat($name_subcat,$des_subcat,$id_cat) == "missing" )
         {
             ?>
-            <span>Merci de renseigner les informations demandées</span>
+            <span class="alert">Merci de renseigner les informations demandées</span>
             <?php
         }
 

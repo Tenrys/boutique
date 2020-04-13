@@ -3,9 +3,9 @@
 ?>
 
         <form action="" method="post">
-                    <label for="catp-select">Choisissez la sous-catégorie actuelle du produit à modifier:</label>
+                    <label class="label" for="catp-select">Choisissez la sous-catégorie actuelle du produit à modifier:</label>
 
-                        <select name="catp-select">
+                        <select class="select" name="catp-select">
                             <?php
                         foreach($cat_p as $p)
                         {
@@ -17,7 +17,7 @@
                             
                             <option value="add-product">Ajouter un produit</option>
                         </select>
-                        <input type="submit" name="choose-catp">
+                        <input class="button_form" type="submit" name="choose-catp">
                     </form>
 <?php
 if(isset($_POST['choose-catp']) && $_POST['catp-select'] != "add-product")
@@ -29,9 +29,9 @@ if(isset($_POST['choose-catp']) && $_POST['catp-select'] != "add-product")
 
     ?>
     <form action="" method="post">
-                    <label for="product-select">Choisissez le produit à modifier:</label>
+                    <label class="label" for="product-select">Choisissez le produit à modifier:</label>
 
-                        <select name="product-select">
+                        <select class="select" name="product-select">
                             <?php
                         foreach($product as $pro)
                         {
@@ -42,7 +42,7 @@ if(isset($_POST['choose-catp']) && $_POST['catp-select'] != "add-product")
                             ?>
                     
                         </select>
-                        <input type="submit" name="choose-product">
+                        <input class="button_form" type="submit" name="choose-product">
                     </form>
                     <?php
 
@@ -51,18 +51,18 @@ else if(isset($_POST['choose-catp']) && $_POST['catp-select'] == "add-product")
 {
    ?>
         <form action="" method="post">
-            <label for="img_pro">Image du produit</label></br>
-            <input type="file" name="img_pro" accept="image/png"></br>
-            <label for="name_pro">Nom du produit</label></br>
-            <input type="text" name="name_pro" required></br>
-            <label for="des_pro">Description du produit</label></br>
-            <textarea name="des_pro" rows="8" cols="33" required></textarea></br>
-            <label for="price">Prix du produit</label></br>
-            <input type="number" name="price" required></br>
-            <label for="quantity">Stock</label></br>
-            <input type="number" name="quantity" required></br>
-            <label for="id_subcategory">Sous-catégorie propriétaire</label>
-                <select name="id_subcategory">
+            <label class="label" for="img_pro">Image du produit</label></br>
+            <input class="input" type="file" name="img_pro" accept="image/png"></br>
+            <label class="label" for="name_pro">Nom du produit</label></br>
+            <input class="input" type="text" name="name_pro" required></br>
+            <label class="label" for="des_pro">Description du produit</label></br>
+            <textarea class="input" name="des_pro" rows="8" cols="33" required></textarea></br>
+            <label class="label" for="price">Prix du produit</label></br>
+            <input class="input" type="number" name="price" required></br>
+            <label class="label" for="quantity">Stock</label></br>
+            <input class="input" type="number" name="quantity" required></br>
+            <label class="label" for="id_subcategory">Sous-catégorie propriétaire</label>
+                <select class="select" name="id_subcategory">
                     <?php
                 foreach($cat_p as $p)
                     {
@@ -73,7 +73,7 @@ else if(isset($_POST['choose-catp']) && $_POST['catp-select'] == "add-product")
                     }
                         ?>
                 </select></br>
-            <input type="submit" name="create_product" value="Ajouter un produit">
+            <input class="button_form" type="submit" name="create_product" value="Ajouter un produit">
     </form>
 <?php
 }
@@ -94,19 +94,19 @@ if(isset($_POST['create_product']))
     if($_SESSION['admin']->createProduct($name_pro, $des_pro, $img, $price, $quantity, $date, $id_subcat) == "all good")
     {
         ?>
-        <span>Votre produit à bien été créer</span>
+        <span class="alert">Votre produit à bien été créer</span>
         <?php
     }
     else if($_SESSION['admin']->createProduct($name_pro, $des_pro, $img, $price, $quantity, $date, $id_subcat) == "name")
     {
         ?>
-        <span>Un produit existant porte déjà ce nom</span>
+        <span class="alert">Un produit existant porte déjà ce nom</span>
         <?php
     }
     else if($_SESSION['admin']->createProduct($name_pro, $des_pro, $img, $price, $quantity, $date, $id_subcat) == "missing")
     {
         ?>
-        <span>Merci de remplir toutes les informations</span>
+        <span class="alert">Merci de remplir toutes les informations</span>
         <?php
     }
 
@@ -122,19 +122,19 @@ if(isset($_POST['choose-product']))
         {
             ?>
             <form action="" method="post">
-                <label for="img_pro">Image du produit</label></br>
-                <img src="<?php echo $obj['img']?>"/></br>
-                <input type="file" name="img" accept="image/png"></br>
-                <label for="name_pro">Nom du produit</label></br>
-                <input type="text" name="name_pro" value="<?php echo $obj['name']?>" required></br>
-                <label for="des_pro">Description du produit</label></br>
-                <textarea name="des_pro" rows="8" cols="33" required><?php echo $obj['description']?></textarea></br>
-                <label for="price">Prix du produit</label></br>
-                <input type="number" name="price" value="<?php echo $obj['price']?>" required></br>
-                <label for="quantity">Quantité restante</label></br>
-                <input type="number" name="quantity" value="<?php echo $obj['quantity']?>" required></br>
-                <label for="id_subcategory">Sous-catégorie propriétaire</label>
-                    <select name="id_subcategory">
+                <label class="label" for="img_pro">Image du produit</label></br>
+                <img class="img_form" src="<?php echo $obj['img']?>"/></br>
+                <input class="input" type="file" name="img" accept="image/png"></br>
+                <label class="label" for="name_pro">Nom du produit</label></br>
+                <input class="input" type="text" name="name_pro" value="<?php echo $obj['name']?>" required></br>
+                <label class="label" for="des_pro">Description du produit</label></br>
+                <textarea class="input" name="des_pro" rows="8" cols="33" required><?php echo $obj['description']?></textarea></br>
+                <label class="label" for="price">Prix du produit</label></br>
+                <input class="input" type="number" name="price" value="<?php echo $obj['price']?>" required></br>
+                <label class="label" for="quantity">Quantité restante</label></br>
+                <input class="input" type="number" name="quantity" value="<?php echo $obj['quantity']?>" required></br>
+                <label class="label" for="id_subcategory">Sous-catégorie propriétaire</label>
+                    <select class="select" name="id_subcategory">
                         <?php
                     foreach($cat_p as $p)
                         {
@@ -149,8 +149,8 @@ if(isset($_POST['choose-product']))
                         }
                             ?>
                     </select></br>
-                <input type="submit" name="update_product" value="Modifier ce produit">
-                <input type="submit" name="delete_product" value="Supprimer ce produit">
+                <input class="button_form" type="submit" name="update_product" value="Modifier ce produit">
+                <input class="button_form" type="submit" name="delete_product" value="Supprimer ce produit">
 
             </form>
             <?php
@@ -179,13 +179,13 @@ if(isset($_POST['choose-product']))
         if($_SESSION['admin']->updateProduct($id, $name_product, $des_product, $price, $quantity, $id_subcat, $img) == "good")
         {
             ?>
-            <span>Le produit à été modifié</span>
+            <span class="alert">Le produit à été modifié</span>
             <?php
         }
         else
         {
             ?>
-            <span>Une erreur est survenue</span>
+            <span class="alert">Une erreur est survenue</span>
             <?php
         }
     }
@@ -194,7 +194,7 @@ if(isset($_POST['choose-product']))
         $id = $_SESSION['admin']->getIdProduct();
         $_SESSION['admin']->deleteProduct($id);
         ?>
-        <span>Le produit a bien été supprimé</span>
+        <span class="alert">Le produit a bien été supprimé</span>
         <?php
     }
 

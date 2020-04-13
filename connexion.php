@@ -29,19 +29,19 @@ if($_SESSION['user']->isConnected() != false){
 <body>
 <?php require 'include/header.php'?>
 
-<main class="main">
-<h1> Connexion </h1>
+<main>
+<h1 class="title_medium"> Connexion </h1>
 
 
    <section class="section">
-        <form class="formulaire" action="<?= HTTP_ROOT ?>connexion.php" method="post">
+        <form class="formu" action="<?= HTTP_ROOT ?>connexion.php" method="post">
         
-            <label for="email">Email</label>
-            <input type="email" name="email" required><br>
-            <label for="password">Mot de passe</label>
-            <input type="password" name="password" required><br>
+            <label class="label" for="email">Email</label>
+            <input class="input" type="email" name="email" required><br>
+            <label class="label" for="password">Mot de passe</label>
+            <input class="input" type="password" name="password" required><br>
 
-            <input type="submit" name="submit" value="Connectez-vous">
+            <input class="button_form" type="submit" name="submit" value="Connectez-vous">
         </form>
    </section>
 <?php
@@ -60,20 +60,20 @@ if(isset($_POST["submit"])){
     else if($_SESSION['user']->login($_POST['email'],$_POST['password']) == "mdp")
     {
         ?>
-            <p>Votre mot de passe est incorrect</p>
+            <span class="alert">Votre mot de passe est incorrect</span>
         <?php
     }
     else if($_SESSION['user']->login($_POST['email'],$_POST['password']) == "mail")
     {
         ?>
-        <p>Aucun utilisateur trouvé avec cet email</p>
+        <span class="alert">Aucun utilisateur trouvé avec cet email</span>
         <?php
     }
     
 }
 ?>
 <section class="section">
-    <div class="bloc">
+    <div class="profil_option">
         <span>
             Vous n'avez pas de compte ? Inscrivez vous <a href="<?= HTTP_ROOT ?>inscription.php">ici</a>
         </span>

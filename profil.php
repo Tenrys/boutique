@@ -43,7 +43,7 @@ $point = $_SESSION["user"]->getPoints();
 
 ?>
 
-<div>
+<div class="profil">
 <span>Bonjour <?php echo $name[0] ?><br>
         Vous avez actuellement <?php echo $point ?> points</span>
         <?php
@@ -57,23 +57,23 @@ $point = $_SESSION["user"]->getPoints();
 
         ?>
 </div>
-<div>
+<div class="profil_option">
     <a href="purchase.php">Vos dernières commandes</a>
 </div>
-<div>
+<div class="profil_option">
     <a href="adress.php">Votre carnet d'adresse</a>
 </div>
-<div>
+<div class="profil_option">
     <a href="wishlist.php">Votre liste d'envie</a>
 </div>
-<div>
+<div class="profil_option">
     <a href="profil-client.php">Modifier vos informations</a>
 </div>
 <?php
 if($_SESSION['user']->getGrade() == "admin")
 {
     ?>
-    <div>
+    <div class="profil_option">
         <a href="admin.php">Accèder au panneau de contrôle</a>
     </div>
     <?php

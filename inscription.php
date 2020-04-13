@@ -27,30 +27,31 @@ if($_SESSION['user']->isConnected() != false){
 
 <body>
 
-<main>
+
 <?php require 'include/header.php'?>
-<h1> Inscription </h1>
+<main>
+<h1 class="title_medium"> Inscription </h1>
 
 
    
-        <form class="formulaire" action="inscription.php" method="post">
+        <form class="form" action="inscription.php" method="post">
         
-            <label for="lastname">Nom</label>
-            <input type="text" name="lastname" required><br>
-            <label for="firstname">Prénom</label>
-            <input type="text" name="firstname" required><br>
-            <label for="mail">Email</label>
-            <input type="email" name="mail" required><br>
-            <label for="birthday">Anniversaire</label>
-            <input type="date" name="birthday" required></br>
-            <label for="parrain">Email de votre parrain</label>
-            <input type="email" name="parrain" ></br>
-            <label for="password">Mot de passe</label>
-            <input type="password" name="password" required><br>
-            <label for="cpassword">Confirmez votre mot de passe</label>
-            <input type="password" name="cpassword" required><br>
+            <label class="label" for="lastname">Nom</label>
+            <input class="input" type="text" name="lastname" required><br>
+            <label class="label" for="firstname">Prénom</label>
+            <input class="input" type="text" name="firstname" required><br>
+            <label class="label" for="mail">Email</label>
+            <input class="input" type="email" name="mail" required><br>
+            <label class="label" for="birthday">Anniversaire</label>
+            <input class="input" type="date" name="birthday" required></br>
+            <label class="label" for="parrain">Email de votre parrain</label>
+            <input class="input" type="email" name="parrain" ></br>
+            <label class="label" for="password">Mot de passe</label>
+            <input class="input" type="password" name="password" required><br>
+            <label class="label" for="cpassword">Confirmez votre mot de passe</label>
+            <input class="input" type="password" name="cpassword" required><br>
 
-            <input type="submit" name="submit" value="S'inscrire">
+            <input class="button_form" type="submit" name="submit" value="S'inscrire">
         </form>
 
         <?php

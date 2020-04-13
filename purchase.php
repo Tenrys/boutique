@@ -25,6 +25,8 @@ if(!isset($_SESSION['user'])){
     <?php require 'include/header.php'?>
 
 <main>
+    <div>
+        <h1 class="title_medium">Vos commandes</h1>
     <table>
         <thead>
             <tr>
@@ -33,6 +35,7 @@ if(!isset($_SESSION['user'])){
                 <td>Prix total</td>
                 <td>Moyen de paiement</td>
                 <td>Adresse</td>
+                <td></td>
             </tr>
         </thead>
         <tbody>
@@ -66,6 +69,7 @@ if(!isset($_SESSION['user'])){
         $product = $_SESSION['user']->getPurchase_Product($id);
 
 ?>
+<div>
 <table>
     <thead>
         <tr>
@@ -96,9 +100,10 @@ if(!isset($_SESSION['user'])){
 ?>
     </tbody>
 </table>
-
+</div>
     </tbody>
     </table>
+    </div>
 </main>
 
     <?php require 'include/footer.php'?>

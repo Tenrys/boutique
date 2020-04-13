@@ -39,18 +39,14 @@ $id_user = $_SESSION['user']->getId();
 
 ?>
 <div>
+<h1 class="title_medium">Votre liste d'envie</h1>
 <table>
     <thead>
-        <tr>
-        <td>Votre wishlist<td>
-        <tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>              </td>
+            <td>Image du produit</td>
             <td>Nom du produit</td>
             <td>Prix</td>
-        </tr>
+    </thead>
+    <tbody>
 
 <?php
     foreach($wishlist as $product)

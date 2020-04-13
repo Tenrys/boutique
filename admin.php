@@ -20,7 +20,7 @@ if($_SESSION['user']->getGrade() != "admin")
 ?>
 
 <head>
-        <title>Mon compte</title> 
+        <title>Panel de contrôle</title> 
         <link rel="stylesheet" href="css/style.css">
         <meta charset="utf-8_decode">
 </head>
@@ -33,19 +33,19 @@ if($_SESSION['user']->getGrade() != "admin")
 
 <main>
     <section>
-        <h1>Catégories</h1>
+        <h1 class="title_medium">Catégories</h1>
             <?php
                 include 'cat-adm.php';
             ?>
     </section>
     <section>
-        <h1>Sous-Catégories</h1>
+        <h1 class="title_medium">Sous-Catégories</h1>
             <?php
                 include 'sub-cat-adm.php';
             ?>
     </section>
     <section>
-        <h1>Produits</h1>
+        <h1 class="title_medium">Produits</h1>
             <?php
                 include 'product-adm.php';
             ?>
