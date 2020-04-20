@@ -1,6 +1,7 @@
 <?php
 
 class SubCategory extends ShopItem {
+	protected static Array $cache = [];
 	protected static string $table = "subcategories";
 
 	protected string $name;

@@ -3,6 +3,23 @@
 class ShopItem extends Item {
 	protected ?int $id = null;
 
+	protected static function &Cache($data) {
+		if (is_array($data)) {
+			if (!isset(static::$cache[$data["id"]])) {
+				static::$cache[$data["id"]] = new static($data);
+			}
+			return static::$cache[$data["id"]];
+		} elseif ($data instanceof static) {
+			if (!isset(static::$cache[$data->getDatabaseId()])) {
+				static::$cache[$data->getDatabaseId()] = new static($data);
+			}
+			return static::$cache[$data->getDatabaseId()];
+		} else {
+			$class = get_called_class();
+			throw new InvalidArgumentException(__METHOD__ . " requires either a $class, or an Array of information to create a new $class");
+		}
+	}
+
 	public static function Get($data) {
 		$shopItem = false;
 		if ($data instanceof static) {
@@ -42,6 +59,13 @@ class ShopItem extends Item {
 		$this->setId($data["id"] ?? null);
 	}
 
+	public function getDatabaseId() {
+		return $this->getId();
+	}
+	public function inDatabase() {
+		return (bool)static::Get(["id" => $this->getId()]);
+	}
+
 	public function getId() { return $this->id; }
 	public function setId($id = null) {
 		if ($id) {
@@ -51,11 +75,4 @@ class ShopItem extends Item {
 			$this->id = $id;
 		}
 	}
-	public function inDatabase() {
-		return (bool)static::Get(["id" => $this->getId()]);
-	}
-	public function getDatabaseId() {
-		return $this->getId();
-	}
-
 }

@@ -1,14 +1,14 @@
 <?php
 
-class Item {
+abstract class Item {
 	public static PDO $db;
+	protected static Array $cache;
 	protected static string $table;
 
 	protected static Array $sqlMap = [];
 
-	public function inDatabase() {
-		return false;
-	}
+	abstract public function getDatabaseId();
+	abstract public function inDatabase();
 	public function toArray() {
 		$arr = [];
 
@@ -40,6 +40,8 @@ class Item {
 
 		return $arr;
 	}
+
+	abstract protected static function Cache($data);
 
 	public static function Ready() {
 		return self::$db instanceof PDO && is_string(static::$table);
@@ -73,7 +75,7 @@ class Item {
 		[$success, $result] = self::Query($request, $data);
 		if (is_array($result)) {
 			foreach ($result as $key => $value) {
-				$result[$key] = new static($value);
+				$result[$key] = &static::Cache($value);
 			}
 		}
 
@@ -82,7 +84,7 @@ class Item {
 
 	public static function Get(Array $data) {
 		$result = static::Find($data);
-		if ($result) $result = $result[0];
+		if ($result) $result = &$result[0];
 
 		return is_array($result) ? null : $result;
 	}
@@ -104,6 +106,7 @@ class Item {
 			if (!$item->getId()) {
 				$item->setId(self::$db->lastInsertId());
 			}
+			static::Cache($item);
 			return true;
 		} else {
 			var_dump($stmt->errorInfo());
@@ -126,6 +129,7 @@ class Item {
 
 		[$success, $result] = self::Query($request, [$item->getId()]);
 		if ($success) {
+			unset(static::$cache[$item->getId()]);
 			$item = null;
 			return true;
 		} else {

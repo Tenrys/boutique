@@ -1,6 +1,7 @@
 <?php
 
 class Comment extends ShopItem {
+	protected static Array $cache = [];
 	protected static string $table = "comments";
 
 	protected User $user;

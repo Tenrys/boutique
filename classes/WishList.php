@@ -3,6 +3,7 @@
 // Example MySQL object class deriving ShopItem, DO NOT USE, only copy from.
 
 class WishList extends ShopItem {
+	protected static Array $cache = [];
 	protected static string $table = "wishlist";
 
 	protected User $user;

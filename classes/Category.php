@@ -1,6 +1,7 @@
 <?php
 
 class Category extends ShopItem {
+	protected static Array $cache = [];
 	protected static string $table = "categories";
 
 	protected string $name;

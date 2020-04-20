@@ -1,6 +1,7 @@
 <?php
 
 class User extends ShopItem {
+	protected static Array $cache = [];
 	protected static string $table = "users";
 
 	protected string $firstName;

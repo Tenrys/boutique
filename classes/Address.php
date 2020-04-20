@@ -1,6 +1,7 @@
 <?php
 
 class Address extends ShopItem {
+	protected static Array $cache = [];
 	protected static string $table = "addresses";
 
 	protected User $user;
