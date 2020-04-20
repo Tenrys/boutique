@@ -43,7 +43,7 @@ class Product extends ShopItem {
 	public function setQuantity(int $quantity) { $this->quantity = $quantity; }
 	public function setSubcategory($subcategory) { $this->subcategory = SubCategory::Get($subcategory); }
 
-	public function getPopularity() {
+	public function getRating() {
 		$ratings = array_map(fn($comment) => $comment->getRating(), Comment::Find(["id_product" => $this->getId()]));
 		$total = count($ratings);
 		return $total == 0 ? 0 : array_sum($ratings) / $total;

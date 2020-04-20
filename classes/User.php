@@ -92,4 +92,6 @@ class User extends ShopItem {
 	public function setRank(int $rank) { $this->rank = $rank; }
 	public function _setBirthday($date) { $this->birthday = $date; }
 	public function setBirthday($date) { _set_item_date($this, "_setBirthday", $date); }
+
+	public function getFullName() { return $this->firstName . " " . $this->lastName; }
 }
