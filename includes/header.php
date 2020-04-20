@@ -1,6 +1,8 @@
-<nav>
-	<a href="index.php">Acceuil</a>
-	<a href="register.php">Inscription</a>
-	<a href="login.php">Connexion</a>
-	<a href="disconnect.php">Déconnexion</a>
-</nav>
+<header>
+    <section id="banner">
+        <h1 class="title">La boutique de Terry</h1>
+    </section>
+    <div id="header">
+        <?php require_once("nav.php") ?>
+    </div>
+</header>

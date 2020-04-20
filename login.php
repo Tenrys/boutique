@@ -28,24 +28,24 @@ if (isset($_POST["login"])) {
         <?php require("includes/header.php") ?>
 
         <main>
-            <h1>Connexion</h1>
+            <h1 class="title-medium">Connexion</h1>
 
             <section class="section">
                 <?php if (isset($message)) { ?>
-                    <p class="error"><?= $message ?></p>
+                    <p class="alert"><?= $message ?></p>
                 <?php } ?>
-                <form class="formulaire" method="post">
-                    <label for="email">E-mail</label>
-                    <input type="email" name="email" required>
+                <form class="form" method="post">
+                    <label class="label" for="email">E-mail</label>
+                    <input class="input" type="email" name="email" required>
                     <br>
-                    <label for="password">Mot de passe</label>
-                    <input type="password" name="password" required>
+                    <label class="label" for="password">Mot de passe</label>
+                    <input class="input" type="password" name="password" required>
                     <br>
-                    <input type="submit" name="login" value="Se connecter">
+                    <input class="button-form" type="submit" name="login" value="Se connecter">
                 </form>
             </section>
             <section class="section">
-                <div class="bloc">
+                <div class="profile-option">
                     <p>
                         Vous n'avez pas de compte ? Inscrivez-vous <a href="inscription.php">ici</a> !
                     </p>
