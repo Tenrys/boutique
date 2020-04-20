@@ -4,8 +4,8 @@ class ProductPurchase extends ShopItem {
 	protected static Array $cache = [];
 	protected static string $table = "purchases_products";
 
-	protected Purchase $purchase;
-	protected Product $product;
+	protected ?Purchase $purchase;
+	protected ?Product $product;
 	protected int $quantity;
 
 	protected static Array $sqlMap = [

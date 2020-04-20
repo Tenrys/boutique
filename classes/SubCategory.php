@@ -6,7 +6,7 @@ class SubCategory extends ShopItem {
 
 	protected string $name;
 	protected string $description;
-	protected Category $category;
+	protected ?Category $category;
 
 	protected static Array $sqlMap = [
 		"category" => "id_category",

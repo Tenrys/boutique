@@ -9,7 +9,7 @@ class Product extends ShopItem {
 	protected string $imagePath;
 	protected int $price;
 	protected int $quantity;
-	protected SubCategory $subcategory;
+	protected ?SubCategory $subcategory;
 	use DateProperty;
 
 	protected static Array $sqlMap = [

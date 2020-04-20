@@ -4,7 +4,7 @@ class Address extends ShopItem {
 	protected static Array $cache = [];
 	protected static string $table = "addresses";
 
-	protected User $user;
+	protected ?User $user;
 	protected string $name;
 	protected string $address;
 	protected int $zipCode;

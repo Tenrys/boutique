@@ -6,8 +6,8 @@ class WishList extends ShopItem {
 	protected static Array $cache = [];
 	protected static string $table = "wishlist";
 
-	protected User $user;
-	protected Product $product;
+	protected ?User $user;
+	protected ?Product $product;
 
 	protected static Array $sqlMap = [
 		"user" => "id_user",

@@ -21,6 +21,10 @@ require_once("classes/WishList.php");
 require_once("classes/Purchase.php");
 require_once("classes/ProductPurchase.php");
 
+if (!isset($_SESSION)) {
+	session_start();
+}
+
 /* Debug
 if (!isset($_SESSION["user"]) || !$_SESSION["user"]) {
 	$user = User::Get(["firstname" => "Marceau"]);

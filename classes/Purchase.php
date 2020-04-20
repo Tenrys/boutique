@@ -4,8 +4,8 @@ class Purchase extends ShopItem {
 	protected static Array $cache = [];
 	protected static string $table = "purchases";
 
-	protected User $user;
-	protected Address $address;
+	protected ?User $user;
+	protected ?Address $address;
 	protected int $price;
 	protected string $method;
 	use DateProperty;

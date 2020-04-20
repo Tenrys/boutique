@@ -4,8 +4,8 @@ class Comment extends ShopItem {
 	protected static Array $cache = [];
 	protected static string $table = "comments";
 
-	protected User $user;
-	protected Product $product;
+	protected ?User $user;
+	protected ?Product $product;
 	protected string $message;
 	protected int $rating;
 	use DateProperty;

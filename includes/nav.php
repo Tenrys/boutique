@@ -20,17 +20,17 @@
                         <li class="sub">
                             <a class="name-header" href="wishlist.php">Ma liste d'envies</a>
                         </li>
+		                <?php if ($_SESSION["user"]->getRank() > 0) { ?>
+		                    <li class="sub">
+		                        <a class="name-header" href="admin.php">Gérer le site</a>
+		                    </li>
+		                <?php } ?>
                         <li class="sub">
 							<a class="name-header" href="disconnect.php">Déconnexion</a>
                         </li>
                     </ul>
                 </li>
-                <?php if ($_SESSION["user"]->getRank() > 0) { ?>
-                    <li class="sub">
-                        <a class="name-header" href="admin.php">Gérer le site</a>
-                    </li>
-                <?php }
-            } else { ?>
+            <?php } else { ?>
 				<li class="nav">
 					<a class="title-header" href="register.php">Inscription</a>
 				</li>

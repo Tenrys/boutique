@@ -11,7 +11,7 @@ class ShopItem extends Item {
 			return static::$cache[$data["id"]];
 		} elseif ($data instanceof static) {
 			if (!isset(static::$cache[$data->getDatabaseId()])) {
-				static::$cache[$data->getDatabaseId()] = new static($data);
+				static::$cache[$data->getDatabaseId()] = $data;
 			}
 			return static::$cache[$data->getDatabaseId()];
 		} else {
@@ -28,6 +28,8 @@ class ShopItem extends Item {
 			$shopItem = parent::Get(["id" => $data]);
 		} elseif (is_array($data)) {
 			$shopItem = parent::Get($data);
+		} elseif ($data == null) {
+			$shopItem = null;
 		}
 		if ($shopItem === false) {
 			$class = get_called_class();
