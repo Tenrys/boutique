@@ -51,7 +51,7 @@ abstract class Item {
 		$stmt = self::$db->prepare($request);
 		$success = $stmt->execute($data);
 		$result = $stmt->fetchAll();
-		return [$success, $result];
+		return [$success, $result, $stmt];
 	}
 
 	public static function Find(Array $data = []) {
@@ -72,7 +72,7 @@ abstract class Item {
 			}
 		}
 
-		[$success, $result] = self::Query($request, $data);
+		[$success, $result, $stmt] = self::Query($request, $data);
 		if (is_array($result)) {
 			foreach ($result as $key => $value) {
 				$result[$key] = &static::Cache($value);
@@ -101,7 +101,7 @@ abstract class Item {
 		$request = "INSERT INTO " . static::$table . " (" . implode(", ", array_keys($sqlArr)) . ")
 		VALUES (" . implode(", ", array_map(function($key) { return ":$key"; }, array_keys($sqlArr)))  . ")";
 
-		[$success, $result] = self::Query($request, $sqlArr);
+		[$success, $result, $stmt] = self::Query($request, $sqlArr);
 		if ($success) {
 			if (!$item->getId()) {
 				$item->setId(self::$db->lastInsertId());
@@ -127,7 +127,7 @@ abstract class Item {
 
 		$request = "DELETE FROM " . static::$table . " WHERE id = ?";
 
-		[$success, $result] = self::Query($request, [$item->getId()]);
+		[$success, $result, $stmt] = self::Query($request, [$item->getId()]);
 		if ($success) {
 			unset(static::$cache[$item->getId()]);
 			$item = null;
@@ -152,11 +152,11 @@ abstract class Item {
 		$sqlArr = $item->forSQL();
 		$cols = [];
 		foreach($sqlArr as $key => $val) {
-			$cols[] = "$key = :key";
+			$cols[] = "$key = :$key";
 		}
 		$request = "UPDATE " . static::$table . " SET " . implode(", ", $cols) . " WHERE id = :id";
 
-		[$success, $result] = self::Query($request, $sqlArr);
+		[$success, $result, $stmt] = self::Query($request, $sqlArr);
 		if ($success) {
 			return true;
 		} else {
