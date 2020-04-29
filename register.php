@@ -14,9 +14,9 @@ if (isset($_POST["register"])) {
 
 ?>
 
+<!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
         <title>Inscription</title>
         <link rel="stylesheet" href="css/style.css">
     </head>
@@ -34,7 +34,7 @@ if (isset($_POST["register"])) {
                 if (isset($message)) { ?>
                     <p class="alert"><?= $message ?></p>
                 <?php } ?>
-                <form class="formu" method="post">
+                <form class="form" method="post">
                     <label class="label" for="lastname">Nom</label>
                     <input class="input" type="text" name="lastname" required value="<?= $_POST['lastname'] ?? '' ?>">
                     <br>

@@ -10,6 +10,7 @@ die;
 
 ?>
 
+<!DOCTYPE html>
 <html>
     <head>
         <title>Accueil</title>

@@ -12,13 +12,16 @@
 					<a class="title-header" href="profile.php">Mon compte</a>
                     <ul class="cat">
                         <li class="sub">
-                            <a class="name-header" href="edit-profile.php">Modifier mon compte</a>
+                            <a class="name-header" href="basket.php">Mon panier</a>
                         </li>
                         <li class="sub">
                             <a class="name-header" href="orders.php">Mes commandes</a>
                         </li>
                         <li class="sub">
                             <a class="name-header" href="wishlist.php">Ma liste d'envies</a>
+                        </li>
+                        <li class="sub">
+                            <a class="name-header" href="edit-profile.php">Modifier mon compte</a>
                         </li>
 		                <?php if ($_SESSION["user"]->getRank() > 0) { ?>
 		                    <li class="sub">

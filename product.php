@@ -42,41 +42,50 @@ $comments = Comment::Find(["id_product" => $productId]);
 
 ?>
 
+<!DOCTYPE html>
 <html>
     <head>
-        <title>Accueil</title>
+        <title>Produit</title>
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <?php require("includes/header.php") ?>
 
         <main>
-			<section class="product-left">
-				<img src="img/<?= $product->getImagePath() ?>" alt="<?= $product->getName() ?>">
-				<?php show_rating($product) ?>
-				<form action="wishlist.php" method="POST">
-					<input type="hidden" name="id" value="<?= $product->getId() ?>">
-					<input type="submit" value="💖 Ajouter à ma liste d'envies">
-				</form>
-			</section>
-			<section class="product-right">
-				<p><?= $product->getDescription() ?></p>
-				<?php if ($product->getQuantity() > 0) { ?>
-					<form action="basket.php" method="POST">
-						<label for="quantity">Quantité:</label>
-						<input type="number" name="quantity" min="1" max="<?= $product->getQuantity() ?>" value="1"></section>
-						<input type="submit" value="🛒 Ajouter au panier">
+			<section class="product-details">
+				<div>
+					<h1><?= $product->getName() ?></h1>
+					<img src="img/<?= $product->getImagePath() ?>" alt="<?= $product->getName() ?>"><br>
+					<br>
+					<?php show_rating($product) ?>
+					<br>
+					<form action="wishlist.php" method="POST">
 						<input type="hidden" name="id" value="<?= $product->getId() ?>">
+						<input type="submit" value="💖 Ajouter à ma liste d'envies">
 					</form>
-				<?php } else { ?>
-					<p style="color: orange;">Rupture de stock</p>
-				<?php } ?>
+				</div>
+				<div>
+					<p><?= $product->getDescription() ?></p>
+					<p><b>Prix</b>: <?= $product->getPrice() ?> Rubis</p>
+					<?php if ($product->getQuantity() > 0) { ?>
+						<form action="basket.php" method="POST">
+							<input type="hidden" name="id" value="<?= $product->getId() ?>">
+							<label for="quantity">Quantité:</label>
+							<input type="number" name="quantity" min="1" max="<?= $product->getQuantity() ?>" value="1">
+							<span> / <?= $product->getQuantity() ?></span><br>
+							<br>
+							<input type="submit" value="🛒 Ajouter au panier">
+						</form>
+					<?php } else { ?>
+						<p style="color: orange;">Rupture de stock</p>
+					<?php } ?>
+				</div>
 			</section>
 			<section class="comments">
 				<h1>Commentaires</h1>
 				<?php foreach ($comments as $comment) { ?>
-					<div class="comment">
-						<p><?= $comment->getUser()->getFullName() ?></p>
+					<fieldset class="comment">
+						<legend>Par <b><?= $comment->getUser()->getFullName() ?></b></legend>
 						<?php show_rating($comment) ?>
 						<p><?= $comment->getMessage() ?>
 						<p><?= $comment->getDate()->format("\\L\\e Y-m-d à H:i:s") ?></p>
@@ -90,6 +99,7 @@ $comments = Comment::Find(["id_product" => $productId]);
 				<?php } ?>
 			</section>
 			<?php if (isset($_SESSION["user"])) { ?>
+				<br>
 				<section class="add-comment">
 					<fieldset>
 						<legend>Ajouter un commentaire</legend>

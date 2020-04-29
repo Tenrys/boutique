@@ -22,4 +22,9 @@ function show_rating(ShopItem $product) {
 	}
 }
 
+$ranks = [
+	0 => "Utilisateur",
+	1 => "Admin",
+];
+
 ?>

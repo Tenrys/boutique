@@ -61,42 +61,43 @@ usort($products, ($sortMethods[$sort] ?? $sortMethods["popularity"])["sort"]);
 
 ?>
 
+<!DOCTYPE html>
 <html>
     <head>
-        <title>Accueil</title>
+        <title>Produits</title>
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <?php require("includes/header.php") ?>
 
-        <main style="display: flex; justify-content: space-between; margin: 0 1em;">
-            <section class="produits">
+        <main style="display: flex; justify-content: space-between">
+            <section class="products">
                 <div>
                     <p>
-                        <span><?= isset($pickedCategory) ? $pickedCategory->getName() : "Tous les produits" ?></span>
+                        <h1><?= isset($pickedCategory) ? $pickedCategory->getName() : "Tous les produits" ?></h1>
                         <?php if (isset($pickedCategory)) { ?>
                             <span><?= $pickedCategory->getDescription() ?></span>
                         <?php } ?>
                     </p>
                     <p>
                     <?php if (isset($pickedSubcategory)) { ?>
-                        <span><?= $pickedSubcategory->getName() ?></span>
+                        <h2><?= $pickedSubcategory->getName() ?></h2>
                         <span><?= $pickedSubcategory->getDescription() ?></span>
                     <?php } ?>
                     </p>
                 </div>
                 <?php foreach($products as $product) { ?>
-                    <a class="produit" href="product.php?id=<?= $product->getDatabaseId() ?>">
+                    <a class="produit" href="product.php?id=<?= $product->getId() ?>">
                         <img src="img/<?= $product->getImagePath() ?>">
                         <h3><?= $product->getName() ?></h3>
                         <p><?= $product->getDescription() ?></p>
-                        <p><?= $product->getPrice() ?> Rubis</p>
+                        <p><?= number_format($product->getPrice()) ?> Rubis</p>
                     </a>
                 <?php } ?>
             </section>
-            <section class="filtre">
+            <section class="filter">
                 <form method="GET">
-                    <p>Filtrer par:</p>
+                    <h3 >Filtrer par:</h3>
                     <label for="category">Catégorie</label>
                     <select name="category" onchange="this.form.submit()">
                         <option
@@ -108,7 +109,7 @@ usort($products, ($sortMethods[$sort] ?? $sortMethods["popularity"])["sort"]);
 
                         <?php foreach ($categories as $category) { ?>
                             <option
-                                value="<?= $category->getDatabaseId() ?>"
+                                value="<?= $category->getId() ?>"
                                 <?= $categoryId == $category->getId() ? 'selected' : '' ?>
                             >
                                 <?= $category->getName() ?>
@@ -128,7 +129,7 @@ usort($products, ($sortMethods[$sort] ?? $sortMethods["popularity"])["sort"]);
 
                             <?php foreach ($subcategories as $subcategory) { ?>
                                 <option
-                                    value="<?= $subcategory->getDatabaseId() ?>"
+                                    value="<?= $subcategory->getId() ?>"
                                     <?= $subcategoryId == $subcategory->getId() ? 'selected' : '' ?>
                                 >
                                     <?= $subcategory->getName() ?>
@@ -137,7 +138,7 @@ usort($products, ($sortMethods[$sort] ?? $sortMethods["popularity"])["sort"]);
                         </select>
                     <?php } ?>
                     <br>
-                    <p>Trier par:</p>
+                    <h3>Trier par:</h3>
                     <select name="sort" onchange="this.form.submit()">
                         <?php foreach ($sortMethods as $name => $info) { ?>
                             <option

@@ -11,6 +11,7 @@ if (isset($_POST["login"])) {
 
     if ($success && $user instanceof User) {
         $_SESSION["user"] = $user;
+        $_SESSION["balance"] = 10000;
 
         index();
     }
@@ -18,9 +19,9 @@ if (isset($_POST["login"])) {
 
 ?>
 
+<!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
         <title>Connexion</title>
         <link rel="stylesheet" href="css/style.css">
     </head>
