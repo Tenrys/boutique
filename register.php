@@ -44,7 +44,7 @@ if (isset($_POST["register"])) {
                     <label class="label" for="mail">E-mail</label>
                     <input class="input" type="email" name="email" required value="<?= $_POST['email'] ?? '' ?>">
                     <br>
-                    <label class="label" for="birthday">Anniversaire</label>
+                    <label class="label" for="birthday">Date de naissance</label>
                     <input class="input" type="date" name="birthday" required value="<?= $_POST['birthday'] ?? '' ?>">
                     <br>
                     <label class="label" for="password">Mot de passe</label>

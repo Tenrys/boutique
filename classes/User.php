@@ -16,7 +16,7 @@ class User extends ShopItem {
 		"lastName" => "lastname"
 	];
 
-	public static function Register(Array $data) {
+	public static function Register(Array $data, ?User $user = null) {
 		$fields = [
 			"lastname" => true,
 			"firstname" => true,
@@ -30,7 +30,7 @@ class User extends ShopItem {
             if (!isset($data[$field])) return [false, "Champ '$field' manquant", null];
         }
 
-		if (User::Get(["email" => $data["email"]])) {
+		if (User::Get(["email" => $data["email"]]) && (!isset($user) || $user->getEmail() != $data["email"])) {
 			return [false, "Cette adresse e-mail est déjà utilisée par un autre utilisateur", null];
 		}
 
@@ -42,9 +42,18 @@ class User extends ShopItem {
 		unset($data["passwordConfirm"]);
 		$data = array_intersect_key($data, $fields);
 
-		$user = new User($data);
-		$user->setPassword($data["password"]); // Cryptage du mot de passe
-		User::Insert($user);
+		if ($user == null) {
+			$user = new User($data);
+			$user->setPassword($data["password"], true); // Cryptage du mot de passe
+			User::Insert($user);
+		} else {
+			$user->setLastName($data["lastname"]);
+			$user->setFirstName($data["firstname"]);
+			$user->setEmail($data["email"]);
+			$user->setPassword($data["password"], true);
+			$user->setBirthday($data["birthday"]);
+			User::Update($user);
+		}
 
 		return [true, "Inscription réussie", $user];
 	}
