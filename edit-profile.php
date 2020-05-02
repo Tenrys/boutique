@@ -35,8 +35,6 @@ if (isset($_POST["update"])) {
 
 $addresses = Address::Find(["id_user" => $_SESSION["user"]->getId()]);
 
-var_dump($_SESSION["user"]);
-
 ?>
 
 <!DOCTYPE html>
@@ -82,7 +80,7 @@ var_dump($_SESSION["user"]);
 				<h3><b>Adresses</b></h3>
 				<?php foreach ($addresses as $address) { ?>
 					<fieldset class="address">
-						<legend><b><?= $address->getName() ?></b></legend>
+						<legend><?= $address->getName() ?></legend>
 						<form method="post">
 							<input type="hidden" name="address_id" value="<?= $address->getId() ?>">
 							<label for="name"><h3><b>Nom</b></h3></label>

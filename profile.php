@@ -39,7 +39,7 @@ $addresses = Address::Find(["id_user" => $_SESSION["user"]->getId()]);
 				<h3><b>Adresses</b></h3>
 				<?php foreach ($addresses as $address) { ?>
 					<fieldset class="address">
-						<legend><b><?= $address->getName() ?></b></legend>
+						<legend><?= $address->getName() ?></legend>
 						<h3><b>Adresse</b></h3>
 						<p><?= $address->getAddress() ?></p>
 						<h3><b>Code postal</b></h3>

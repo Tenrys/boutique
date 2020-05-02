@@ -22,7 +22,7 @@ class Product extends ShopItem {
 
 		$this->setName($data["name"] ?? "");
 		$this->setDescription($data["description"] ?? "");
-		$this->setImagePath($data["img"] ?? "");
+		$this->setImagePath($data["img"] ?? "products/unknown.jpg");
 		$this->setPrice($data["price"] ?? 0);
 		$this->setQuantity($data["quantity"] ?? 1);
 		$this->setSubcategory($data["id_subcategory"] ?? null);

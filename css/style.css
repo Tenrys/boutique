@@ -38,6 +38,7 @@ body {
     margin : 0;
     padding : 0;
     flex-direction: column;
+    font-family: 'text';
     background-image: url('../img/style/909546.png');
     background-position: center;
     background-repeat: no-repeat;
@@ -181,7 +182,6 @@ nav {
     height: 120%;
 }
 .name-header {
-    font-family: 'text';
     font-size: 120%;
 }
 .sub {
@@ -220,7 +220,6 @@ nav {
 .label {
     display:block;
     text-align: center;
-    font-family: 'text';
     font-size: 150%;
 }
 
@@ -229,7 +228,6 @@ nav {
     width: 480px;
     margin-right: auto;
     margin-left: auto;
-    font-family: 'text';
     font-size: 120%;
 }
 
@@ -265,7 +263,6 @@ nav {
 }
 
 .select {
-    font-family: 'text';
     font-size: 120%;
     display: block;
     margin-right: auto;
@@ -285,7 +282,6 @@ nav {
     margin-right: auto;
     margin-left: auto;
     text-align: center;
-    font-family: 'text';
     font-size: 170%;
 }
 
@@ -315,7 +311,6 @@ nav {
 
 /*--------------TABLEAU------------*/
 table {
-    font-family: 'text';
     display: block;
     margin-right: auto;
     margin-left: auto;

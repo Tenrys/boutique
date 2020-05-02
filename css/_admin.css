@@ -1,0 +1,102 @@
+.admin {
+	display: flex;
+	margin: 0 12.5%;
+}
+/*
+.admin .bunch {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+.admin .bunch form {
+	flex-grow: 0;
+}
+*/
+.admin form {
+	display: flex;
+	flex-grow: 1;
+	margin: 0.25em;
+}
+.admin form fieldset {
+	width: 100%;
+	margin: 0;
+}
+.admin form fieldset .container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 0.5em;
+	height: 100%;
+}
+.admin form fieldset .container .fields {
+	display: flex;
+	height: 100%;
+	padding-bottom: calc(1.5em + 1px);
+}
+.admin form fieldset .container .fields .list {
+	margin-right: 1em;
+}
+.admin form fieldset .container .fields .list select {
+	width: 144px;
+	height: 100%;
+	overflow: auto;
+}
+.admin form fieldset .container .fields .edit {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+.admin form fieldset .container .fields .edit input {
+	width: 100%;
+}
+.admin form fieldset .container .fields .edit input[type="file"] {
+	display: none;
+}
+.admin form fieldset .container .fields .edit .fieldgroups {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+.admin form fieldset .container .fields .edit .fieldgroups .fieldgroup {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+	margin: 0 0.5em;
+}
+.admin form fieldset .container .actions {
+	position: absolute;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	bottom: 4px;
+}
+.admin form fieldset .container .actions input[type="submit"] {
+	margin: 0 0.5em;
+}
+.product-image-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.product-image-container button {
+	display: flex;
+	padding: 0.5em;
+}
+.product-image-container button img {
+	max-width: 128px;
+	max-height: 128px;
+	border: 1px solid rgb(170, 170, 170);
+	border-radius: 1px;
+}
+
+@media screen and (max-width: 632px) {
+	.admin {
+		margin: 0;
+		flex-direction: column;
+	}
+	.admin form fieldset .container .fields .edit .fieldgroups {
+		display: initial;
+	}
+}

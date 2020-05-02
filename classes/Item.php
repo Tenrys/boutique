@@ -1,6 +1,6 @@
 <?php
 
-abstract class Item {
+abstract class Item implements JsonSerializable {
 	public static PDO $db;
 	protected static Array $cache;
 	protected static string $table;
@@ -17,6 +17,9 @@ abstract class Item {
 		}
 
 		return $arr;
+	}
+	public function jsonSerialize() {
+		return $this->toArray();
 	}
 	public function forSQL() {
 		$arr = $this->toArray();
