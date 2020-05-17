@@ -27,4 +27,49 @@ $ranks = [
 	1 => "Admin",
 ];
 
+$sortMethods = [
+    "popularity" => [
+        "niceName" => "Popularité",
+        "sort" => function($a, $b) {
+            $aPop = $a->getRating();
+            $bPop = $b->getRating();
+            if ($aPop == $bPop) {
+                return 0;
+            } else if ($aPop < $bPop) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
+    ],
+    "price" => [
+        "niceName" => "Prix",
+        "sort" => function($a, $b) {
+            $aPop = $a->getPrice();
+            $bPop = $b->getPrice();
+            if ($aPop == $bPop) {
+                return 0;
+            } else if ($aPop < $bPop) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
+    ],
+    "release" => [
+        "niceName" => "Date de sortie",
+        "sort" => function($a, $b) {
+            $aPop = $a->getDate()->getTimestamp();
+            $bPop = $b->getDate()->getTimestamp();
+            if ($aPop == $bPop) {
+                return 0;
+            } else if ($aPop < $bPop) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
+    ]
+];
+
 ?>

@@ -6,37 +6,6 @@ $categoryId = (string)($_GET["category"] ?? "");
 $subcategoryId = (string)($_GET["subcategory"] ?? "");
 $sort = (string)($_GET["sort"] ?? "popularity");
 
-$sortMethods = [
-    "popularity" => [
-        "niceName" => "Popularité",
-        "sort" => function($a, $b) {
-            $aPop = $a->getRating();
-            $bPop = $b->getRating();
-            if ($aPop == $bPop) {
-                return 0;
-            } else if ($aPop < $bPop) {
-                return 1;
-            } else {
-                return -1;
-            }
-        }
-    ],
-    "price" => [
-        "niceName" => "Prix",
-        "sort" => function($a, $b) {
-            $aPop = $a->getPrice();
-            $bPop = $b->getPrice();
-            if ($aPop == $bPop) {
-                return 0;
-            } else if ($aPop < $bPop) {
-                return 1;
-            } else {
-                return -1;
-            }
-        }
-    ]
-];
-
 $categories = Category::Find();
 if (is_numeric($categoryId)) {
     $pickedCategory = Category::Get($categoryId);
@@ -87,7 +56,7 @@ usort($products, ($sortMethods[$sort] ?? $sortMethods["popularity"])["sort"]);
                     </p>
                 </div>
                 <?php foreach($products as $product) { ?>
-                    <a class="produit" href="product.php?id=<?= $product->getId() ?>">
+                    <a class="product" href="product.php?id=<?= $product->getId() ?>">
                         <img src="img/<?= $product->getImagePath() ?>">
                         <h3><?= $product->getName() ?></h3>
                         <p><?= $product->getDescription() ?></p>
