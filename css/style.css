@@ -116,17 +116,24 @@ a.button:hover {
     background-color: #155869;
   }
 
+  #menu .cat {
+    background: none;
+    margin-top: 48px;
+  }
+
   #menu li {
     display: inline-flex;
-    vertical-align: top;
     position: relative;
     height: 100%;
+    vertical-align: top;
   }
   #menu li li {
     display: inherit;
   }
-  #menu ul li a{
-    width: 160px;
+  #menu ul li a {
+    padding: 0;
+    text-align: center;
+    width: 100%;
   }
   #menu a {
     display: block;
@@ -134,47 +141,30 @@ a.button:hover {
     text-decoration: none;
     color: #fff;
   }
-
-  #menu ul li a {
-    padding: 5px 8px;
-  }
   #menu ul {
     position: absolute;
-    z-index: 1000;
     min-width: 100%;
     white-space: nowrap;
     text-align: left;
   }
-  #menu ul ul {
-    left: 100%;
-    top: 0;
-    overflow: hidden;
-    max-width: 0;
-    min-width: 0;
-    transition: 0.3s all;
-  }
-  #menu ul li:hover ul {
-    max-width: 50em;
-  }
   #menu ul li {
     max-height: 0;
     overflow: hidden;
-    transition: all 0.8s;
-  }
-  #menu li li li {
-    max-height: inherit;
+    transition: all 0.25s linear;
+    display: flex;
+    align-items: center;
   }
   #menu li:hover li {
-    max-height: 15em;
+    max-height: 66%;
     overflow: visible;
   }
-#nav {
-    height: 48px;
-}
-#nav form {
+  #menu form {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+  }
+#nav {
+    height: 100%;
 }
 .title-header {
     font-family: 'Medium title';
@@ -182,7 +172,7 @@ a.button:hover {
 }
 
 nav {
-    height: 120%;
+    height: 48px;
 }
 .name-header {
     font-size: 120%;
