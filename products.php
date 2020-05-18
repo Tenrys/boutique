@@ -5,6 +5,7 @@ require_once("includes/init.php");
 $categoryId = (string)($_GET["category"] ?? "");
 $subcategoryId = (string)($_GET["subcategory"] ?? "");
 $sort = (string)($_GET["sort"] ?? "popularity");
+$searchQuery = strtolower((string)($_GET["search_query"] ?? ""));
 
 $categories = Category::Find();
 if (is_numeric($categoryId)) {
@@ -26,6 +27,21 @@ if (!isset($products)) {
     $products = Product::Find();
 }
 
+if (strlen($_GET["search_query"]) > 0) {
+    $found = [];
+
+    foreach ($products as $product) {
+    	if (strstr(strtolower($product->getName()), $searchQuery) ||
+    		strstr(strtolower($product->getDescription()), $searchQuery) &&
+    		!in_array($product, $found))
+    	{
+    		$found[] = $product;
+    	}
+    }
+
+    $products = $found;
+}
+
 usort($products, ($sortMethods[$sort] ?? $sortMethods["popularity"])["sort"]);
 
 ?>
@@ -42,6 +58,11 @@ usort($products, ($sortMethods[$sort] ?? $sortMethods["popularity"])["sort"]);
         <main style="display: flex; justify-content: space-between">
             <section class="products">
                 <div>
+                    <?php if (isset($found)) { ?>
+                        <p>
+                            <h1><?= count($found) ?> résultat<?= count($found) == 1 ? "" : "s" ?> pour "<?= htmlspecialchars($searchQuery) ?>"</h1>
+                        </p>
+                    <?php } ?>
                     <p>
                         <h1><?= isset($pickedCategory) ? $pickedCategory->getName() : "Tous les produits" ?></h1>
                         <?php if (isset($pickedCategory)) { ?>
@@ -65,7 +86,7 @@ usort($products, ($sortMethods[$sort] ?? $sortMethods["popularity"])["sort"]);
                 <?php } ?>
             </section>
             <section class="filter">
-                <form method="GET">
+                <form method="GET" name="filter" id="filter">
                     <h3 >Filtrer par:</h3>
                     <label for="category">Catégorie</label>
                     <select name="category" onchange="this.form.submit()">

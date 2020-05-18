@@ -1,0 +1,10 @@
+.rating {
+    position: relative;
+}
+.rating:before {
+    content: "⭐⭐⭐⭐⭐";
+    filter: brightness(-100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+}

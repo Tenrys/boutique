@@ -41,6 +41,17 @@
 					<a class="title-header" href="login.php">Connexion</a>
 				</li>
 			<?php } ?>
+			<li class="nav">
+				<form action="products.php" method="GET">
+					<input
+						type="search"
+						name="search_query"
+						value="<?= @$_GET["search_query"] ?? "" ?>"
+						placeholder="🔎 Rechercher..."
+						<?= basename($_SERVER["SCRIPT_NAME"]) == "products.php" ? "form='filter'" : "" ?>
+					>
+				</form>
+			</li>
 		</ul>
 	</div>
 </nav>

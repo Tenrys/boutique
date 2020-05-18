@@ -1,0 +1,10 @@
+.item-showcase {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.item-showcase .product {
+	display: block;
+	margin: 1em;
+	flex-basis: 100%;
+}

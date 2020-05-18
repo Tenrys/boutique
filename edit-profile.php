@@ -55,19 +55,19 @@ $addresses = Address::Find(["id_user" => $_SESSION["user"]->getId()]);
                 <fieldset class="profile-info">
 	                <form method="POST">
 						<label for="lastname"><h3><b>Nom</b></h3></label>
-						<input type="text" minlength="3" maxlength="255" name="lastname" required value="<?= $_SESSION["user"]->getLastName() ?>">
+						<input type="text" minlength="3" maxlength="255" name="lastname" required value="<?= htmlspecialchars($_SESSION["user"]->getLastName()) ?>">
 						<br>
 						<label for="firstname"><h3><b>Prénom</b></h3></label>
-						<input type="text" minlength="3" maxlength="255" name="firstname" required value="<?= $_SESSION["user"]->getFirstName() ?>">
+						<input type="text" minlength="3" maxlength="255" name="firstname" required value="<?= htmlspecialchars($_SESSION["user"]->getFirstName()) ?>">
 						<br>
 						<label for="email"><h3><b>E-mail</b></h3></label>
-						<input type="email" minlength="3" maxlength="255" name="email" required value="<?= $_SESSION["user"]->getEmail() ?>">
+						<input type="email" minlength="3" maxlength="255" name="email" required value="<?= htmlspecialchars($_SESSION["user"]->getEmail()) ?>">
 						<br>
 						<label for="password"><h3><b>Mot de passe</b></h3></label>
-	                    <input type="password" name="password" value="<?= $_POST["password"] ?? "" ?>"><br>
+	                    <input type="password" name="password" value="<?= htmlspecialchars($_POST["password"] ?? "") ?>"><br>
 	                    <br>
 	                    <label for="passwordConfirm"><h3><b>Confirmez votre mot de passe</b></h3></label>
-	                    <input type="password" name="passwordConfirm" value="<?= $_POST["passwordConfirm"] ?? "" ?>">
+	                    <input type="password" name="passwordConfirm" value="<?= htmlspecialchars($_POST["passwordConfirm"] ?? "") ?>">
 	                    <br>
 						<label for="birthday"><h3><b>Date de naissance</b></h3></label>
 						<input type="date" name="birthday" value="<?= strftime("%G-%m-%d", $_SESSION["user"]->getBirthday()->getTimestamp()) ?>">
@@ -84,19 +84,19 @@ $addresses = Address::Find(["id_user" => $_SESSION["user"]->getId()]);
 						<form method="post">
 							<input type="hidden" name="address_id" value="<?= $address->getId() ?>">
 							<label for="name"><h3><b>Nom</b></h3></label>
-							<input type="text" name="name" minlength="3" maxlength="255" value="<?= $address->getName() ?>">
+							<input type="text" name="name" minlength="3" maxlength="255" value="<?= htmlspecialchars($address->getName()) ?>">
 							<br>
 							<label for="address"><h3><b>Adresse</b></h3></label>
-							<input type="text" name="address" minlength="3" maxlength="500" value="<?= $address->getAddress() ?>">
+							<input type="text" name="address" minlength="3" maxlength="500" value="<?= htmlspecialchars($address->getAddress()) ?>">
 							<br>
 							<label for="zip_code"><h3><b>Code postal</b></h3></label>
-							<input type="number" name="zip_code" value="<?= $address->getZipCode() ?>">
+							<input type="number" name="zip_code" value="<?= htmlspecialchars($address->getZipCode()) ?>">
 							<br>
 							<label for="city"><h3><b>Ville</b></h3></label>
-							<input type="text" name="city" minlength="3" maxlength="140" value="<?= $address->getCity() ?>">
+							<input type="text" name="city" minlength="3" maxlength="140" value="<?= htmlspecialchars($address->getCity()) ?>">
 							<br>
 							<label for="country"><h3><b>Pays</b></h3></label>
-							<input type="text" name="country" minlength="3" maxlength="140" value="<?= $address->getCountry() ?>"><br>
+							<input type="text" name="country" minlength="3" maxlength="140" value="<?= htmlspecialchars($address->getCountry()) ?>"><br>
 							<br>
 							<input type="submit" name="update_address" value="Modifier">
 							<input type="submit" name="delete_address" value="Supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette adresse ?')">

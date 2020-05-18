@@ -24,11 +24,11 @@ $addresses = Address::Find(["id_user" => $_SESSION["user"]->getId()]);
 	            <h3><b>Mon profil</b></h3>
 				<fieldset class="profile-info">
 					<h3><b>Nom</b></h3>
-					<p><?= $_SESSION["user"]->getLastName() ?></p>
+					<p><?= htmlspecialchars($_SESSION["user"]->getLastName()) ?></p>
 					<h3><b>Prénom</b></h3>
-					<p><?= $_SESSION["user"]->getFirstName() ?></p>
+					<p><?= htmlspecialchars($_SESSION["user"]->getFirstName()) ?></p>
 					<h3><b>E-mail</b></h3>
-					<p><?= $_SESSION["user"]->getEmail() ?></p>
+					<p><?= htmlspecialchars($_SESSION["user"]->getEmail()) ?></p>
 					<h3><b>Rang</b></h3>
 					<p><?= $ranks[$_SESSION["user"]->getRank()] ?? "???" ?></p>
 					<h3><b>Date de naissance</b></h3>
@@ -39,15 +39,15 @@ $addresses = Address::Find(["id_user" => $_SESSION["user"]->getId()]);
 				<h3><b>Adresses</b></h3>
 				<?php foreach ($addresses as $address) { ?>
 					<fieldset class="address">
-						<legend><?= $address->getName() ?></legend>
+						<legend><?= htmlspecialchars($address->getName()) ?></legend>
 						<h3><b>Adresse</b></h3>
-						<p><?= $address->getAddress() ?></p>
+						<p><?= htmlspecialchars($address->getAddress()) ?></p>
 						<h3><b>Code postal</b></h3>
-						<p><?= $address->getZipCode() ?></p>
+						<p><?= htmlspecialchars($address->getZipCode()) ?></p>
 						<h3><b>Ville</b></h3>
-						<p><?= $address->getCity() ?></p>
+						<p><?= htmlspecialchars($address->getCity()) ?></p>
 						<h3><b>Pays</b></h3>
-						<p><?= $address->getCountry() ?></p>
+						<p><?= htmlspecialchars($address->getCountry()) ?></p>
 					</fieldset>
 					<br>
 				<?php } ?>

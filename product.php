@@ -46,6 +46,7 @@ $comments = Comment::Find(["id_product" => $productId]);
 <html>
     <head>
         <title>Produit</title>
+        <link rel="stylesheet" href="css/_special.css">
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
