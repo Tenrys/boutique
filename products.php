@@ -27,7 +27,7 @@ if (!isset($products)) {
     $products = Product::Find();
 }
 
-if (strlen($_GET["search_query"]) > 0) {
+if (strlen($searchQuery) > 0) {
     $found = [];
 
     foreach ($products as $product) {

@@ -103,10 +103,10 @@ $addresses = Address::Find(["id_user" => $_SESSION["user"]->getId()]);
 						</form>
 					</fieldset>
 					<br>
-					<form method="POST">
-						<input type="submit" name="add_address" value="Ajouter une adresse">
-					</form>
 				<?php } ?>
+				<form method="POST">
+					<input type="submit" name="add_address" value="Ajouter une adresse">
+				</form>
 			</section>
         </main>
 
