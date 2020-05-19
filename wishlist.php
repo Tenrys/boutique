@@ -38,7 +38,7 @@ if (isset($_POST["id"])) {
 				<?php foreach (WishList::Find(["id_user" => $_SESSION["user"]->getId()]) as $wishlist) { ?>
 					<fieldset class="product-wishlist">
 						<div>
-							<a href="product.php?id=<?= $wishlist->getProduct()->getId() ?>">
+							<a class="product" href="product.php?id=<?= $wishlist->getProduct()->getId() ?>">
 								<h1><?= $wishlist->getProduct()->getName() ?></h1>
 								<img src="img/<?= $wishlist->getProduct()->getImagePath() ?>" alt="<?= $wishlist->getProduct()->getName() ?>">
 							</a>
@@ -48,7 +48,7 @@ if (isset($_POST["id"])) {
 						</div>
 						<form method="POST">
 							<input type="hidden" name="id" value="<?= $wishlist->getId() ?>">
-							<input type="submit" name="delete" value="Supprimer">
+							<input class="button" type="submit" name="delete" value="Supprimer">
 						</form>
 					</fieldset>
 				<?php } ?>

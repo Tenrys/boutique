@@ -84,7 +84,8 @@ $addresses = Address::Find(["id_user" => $_SESSION["user"]->getId()]);
         <main>
             <section class="basket">
 	            <div class="basket-content">
-	                <div class="products">
+					<h2>Votre panier</h2>
+	                <div>
 		                <?php
 		                foreach ($basket as $item) {
 							$product = $item["product"] ?>
@@ -105,7 +106,7 @@ $addresses = Address::Find(["id_user" => $_SESSION["user"]->getId()]);
 										<label for="quantity">Quantité: </label>
 										<input name="quantity" type="number" min="1" max="<?= $product->getQuantity() ?>" value="<?= $item["quantity"] ?>">
 										<span> / <?= $product->getQuantity() ?></span>
-										<input type="submit" value="Modifier">
+										<input class="button" type="submit" value="Modifier">
 									</form>
 									<br>
 								<?php } ?>

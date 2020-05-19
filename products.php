@@ -55,9 +55,9 @@ usort($products, ($sortMethods[$sort] ?? $sortMethods["popularity"])["sort"]);
     <body>
         <?php require("includes/header.php") ?>
 
-        <main style="display: flex; justify-content: space-between">
+        <main>
             <section class="products">
-                <div>
+                <div class="title_pro">
                     <?php if (isset($found)) { ?>
                         <p>
                             <h1><?= count($found) ?> résultat<?= count($found) == 1 ? "" : "s" ?> pour "<?= htmlspecialchars($searchQuery) ?>"</h1>
@@ -76,14 +76,18 @@ usort($products, ($sortMethods[$sort] ?? $sortMethods["popularity"])["sort"]);
                     <?php } ?>
                     </p>
                 </div>
+                
                 <?php foreach($products as $product) { ?>
+                    <div class="pro">
                     <a class="product" href="product.php?id=<?= $product->getId() ?>">
-                        <img src="img/<?= $product->getImagePath() ?>">
+                        <img class="img-pro" src="img/<?= $product->getImagePath() ?>">
                         <h3><?= $product->getName() ?></h3>
                         <p><?= $product->getDescription() ?></p>
                         <p><?= number_format($product->getPrice()) ?> Rubis</p>
                     </a>
+                    </div>
                 <?php } ?>
+            
             </section>
             <section class="filter">
                 <form method="GET" name="filter" id="filter">

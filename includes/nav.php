@@ -1,19 +1,48 @@
+<?php 
+$db = new PDO("mysql:host=127.0.0.1;dbname=boutique;charset=utf8", "root", "");
+$query = $db->prepare("SELECT name, id FROM categories");
+$query->execute();
+$categories = $query->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+?>
 <nav>
 	<div id="nav">
 		<ul id="menu">
 			<li class="nav">
-				<a class="title-header" href="index.php">Acceuil</a>
+				<a class="title-header" href="index.php">Accueil</a>
 			</li>
 			<li class="nav">
 				<a class="title-header" href="products.php">Produits</a>
+				<ul class="cat">
+					<?php foreach ($categories as $category)
+					{?>	
+					<li class="sub">
+						<a class="name-header" href="products.php?category=<?php echo $category["id"]?>"><?php echo $category['name']?></a>
+						<?php
+						$id = $category["id"];
+						$request = $db->prepare("SELECT name, id FROM subcategories WHERE id_category = $id");
+						$request->execute();
+						$subcategories = $request->fetchAll(PDO::FETCH_ASSOC);
+						foreach($subcategories as $sub)
+						{
+						?>
+							<li class="nav-sub">
+								<a class="name-header" href="products.php?sub=<?php echo $sub['id']?>"><?php echo $sub['name']?></a>
+							</li>
+						<?php }?>
+						
+					</li>
+
+					<?php 
+				}?>
+				</ul>
 			</li>
 			<?php if (isset($_SESSION["user"])) { ?>
 				<li class="nav">
 					<a class="title-header" href="profile.php">Mon compte</a>
                     <ul class="cat">
-                        <li class="sub">
-                            <a class="name-header" href="basket.php">Mon panier</a>
-                        </li>
                         <li class="sub">
                             <a class="name-header" href="orders.php">Mes commandes</a>
                         </li>
@@ -28,10 +57,13 @@
 		                        <a class="name-header" href="admin.php">Gérer le site</a>
 		                    </li>
 		                <?php } ?>
-                        <li class="sub">
-							<a class="name-header" href="disconnect.php">Déconnexion</a>
+						</ul>
+						<li class="nav">
+                            <a class="title-header" href="basket.php">Mon panier</a>
                         </li>
-                    </ul>
+                        <li class="nav">
+							<a class="title-header" href="disconnect.php">Déconnexion</a>
+                        </li>
                 </li>
             <?php } else { ?>
 				<li class="nav">

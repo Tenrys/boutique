@@ -21,6 +21,13 @@ usort($new, $sortMethods["release"]["sort"]);
         <?php require("includes/header.php") ?>
 
         <main>
+            <section class="presentation">
+                <h2>Bienvenue sur la boutique de Terry</h2>
+                <p class="text">
+                    Lassé de devoir parcourir Hyrule à la recherche de client, Terry décide de se mettre à la page pour proposer ses articles à tous, même ceux qui sont loins !
+                    Voici donc sa boutique en ligne, qui ne ressemble certes pas à un scarabée mais qui auras le mérite de vous proposer tout ce dont vous pourriez avoir besoin.
+                </p>
+            </section>
             <section class="popular">
                 <h2>Nos produits en vogue</h2>
                 <div class="item-showcase">
