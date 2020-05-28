@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2020 at 06:33 PM
--- Server version: 10.4.12-MariaDB
--- PHP Version: 7.4.4
+-- Generation Time: May 28, 2020 at 10:49 AM
+-- Server version: 5.7.18
+-- PHP Version: 7.3.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -39,6 +39,13 @@ CREATE TABLE `addresses` (
   `name` varchar(255) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `addresses`
+--
+
+INSERT INTO `addresses` (`id`, `address`, `zip_code`, `city`, `country`, `name`, `id_user`) VALUES
+(1, 'asdasd', 0, 'asdasdas', 'asdasdsd', 'Maison', 7);
 
 -- --------------------------------------------------------
 
@@ -74,7 +81,7 @@ CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
   `id_product` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `message` varchar(500) NOT NULL,
   `rating` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -84,8 +91,9 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `id_product`, `id_user`, `date`, `message`, `rating`) VALUES
-(1, 1, 6, '2020-04-10 18:23:33', 'Oui', 5),
-(2, 5, 6, '2020-04-10 18:24:16', 'Oui', 5);
+(1, 1, 7, '2020-05-14 16:08:13', 'Super', 5),
+(2, 3, 7, '2020-05-14 16:08:24', 'Super', 5),
+(3, 6, 7, '2020-05-19 11:21:06', 'qsdqsdqs', 3);
 
 -- --------------------------------------------------------
 
@@ -100,9 +108,9 @@ CREATE TABLE `products` (
   `description` varchar(500) NOT NULL DEFAULT '',
   `img` varchar(255) NOT NULL DEFAULT '',
   `price` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL DEFAULT 1,
-  `id_subcategory` int(11) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT current_timestamp()
+  `quantity` int(11) NOT NULL DEFAULT '1',
+  `id_subcategory` int(11) DEFAULT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -110,12 +118,12 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `img`, `price`, `quantity`, `id_subcategory`, `date`) VALUES
-(1, 'Truite Volt', 'Cette truite fraichement pêchée, ravira vos papilles et vous donneras une défense amélioré contre les attaques électriques !', 'products/nourriture/poisson/truite-volt.png', 15, 100, 1, '2020-04-07 23:46:08'),
-(2, 'Venaison', 'Cette viande fraichement chassée seras votre meilleure alliée pour tout vos petits creux !', 'products/nourriture/viande/venaison.png', 120, 100, 2, '2020-04-07 23:46:08'),
+(1, 'Truite Volt', 'Cette truite fraichement pêchée, ravira vos papilles et vous donnera une défense améliorée contre les attaques électriques !', 'products/nourriture/poisson/truite-volt.png', 15, 0, 1, '2020-04-07 23:46:08'),
+(2, 'Venaison', 'Cette viande fraichement chassée sera votre meilleure alliée pour tout vos petits creux !', 'products/nourriture/viande/venaison.png', 120, 100, 2, '2020-04-07 23:46:08'),
 (3, 'Champi Armo', 'Ce champignon relèvera vos plats et vous donnera en plus un bonus de défense incroyable', 'products/nourriture/champignon/champi-armo.png', 80, 100, 3, '2020-04-07 23:46:08'),
 (4, 'Baie', 'Cette jolie baie gorgée de soleil ravira vos papilles avec sa douceur !', 'products/nourriture/autre/baie.png', 50, 100, 4, '2020-04-07 23:46:08'),
-(5, 'Épée de Chevalier', 'Cette épée à deux mains pourfendra vos ennemis sans problème, si vous arrivez à la soulever.', 'products/equipement/epee/epee-chevalier.png', 450, 10, 5, '2020-04-07 23:46:08'),
-(6, 'Bouclier du Dieu Bestial', 'Ce bouclier, appartenant autrefois à un Dieu Bestial, sera votre meilleure défense contre n\'importe quel coup asséné par l\'ennemi.', 'products/equipement/bouclier/bouclier-dieu-bestial.png', 5500, 3, 6, '2020-04-07 23:46:08'),
+(5, 'Épée de Chevalier', 'Cette épée à deux mains pourfendra vos ennemis sans problème, si vous arrivez à la soulever.', 'products/equipement/epee/epee-chevalier.png', 450, 0, 5, '2020-05-14 18:09:10'),
+(6, 'Bouclier du Dieu Bestial', 'Ce bouclier, appartenant autrefois à un Dieu Bestial, sera votre meilleure défense contre n\'importe quel coup asséné par l\'ennemi.', 'products/equipement/bouclier/bouclier-dieu-bestial.png', 5500, 2, 6, '2020-04-07 23:46:08'),
 (7, 'Fourche Electrique', 'Cette fourche électrifiera tous vos ennemis, à manier avec précaution', 'products/equipement/lance/fourche-electrique.png', 1200, 5, 7, '2020-04-07 23:46:08'),
 (8, 'Arc Archeonique', 'Cet arc vous permet de viser droit. Extrêmement droit.', 'products/equipement/arc/arc-archeonique.png', 3200, 5, 8, '2020-04-07 23:46:08'),
 (9, 'Baguette Electrique', 'Cette baguette électrifiera tous vos ennemis, à manier avec précaution', 'products/equipement/divers/baguette-electrique.png', 2300, 2, 9, '2020-04-07 23:46:08'),
@@ -136,11 +144,21 @@ DROP TABLE IF EXISTS `purchases`;
 CREATE TABLE `purchases` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `id_address` int(11) NOT NULL,
+  `id_address` int(11) DEFAULT NULL,
   `price` int(11) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `method` varchar(140) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `purchases`
+--
+
+INSERT INTO `purchases` (`id`, `id_user`, `id_address`, `price`, `date`, `method`) VALUES
+(1, 6, NULL, 8460, '2020-04-29 17:07:31', 'rupees'),
+(2, 6, NULL, 15, '2020-04-29 17:23:58', 'rupees'),
+(3, 6, NULL, 1485, '2020-04-29 17:27:28', 'rupees'),
+(4, 7, 1, 5500, '2020-05-28 08:49:05', 'rupees');
 
 -- --------------------------------------------------------
 
@@ -156,6 +174,13 @@ CREATE TABLE `purchases_products` (
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `purchases_products`
+--
+
+INSERT INTO `purchases_products` (`id`, `id_purchase`, `id_product`, `quantity`) VALUES
+(1, 4, 6, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -167,7 +192,7 @@ CREATE TABLE `subcategories` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `id_category` int(11) NOT NULL
+  `id_category` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -204,8 +229,8 @@ CREATE TABLE `users` (
   `firstname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `rank` int(11) NOT NULL DEFAULT 0,
-  `birthday` timestamp NOT NULL DEFAULT current_timestamp()
+  `rank` int(11) NOT NULL DEFAULT '0',
+  `birthday` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -213,7 +238,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `lastname`, `firstname`, `email`, `password`, `rank`, `birthday`) VALUES
-(6, 'Maubert', 'Marceau', 'marceau.maubert@laplateforme.io', '$2y$10$5JgkMXSWFeJvfscNFIKr0Oow9kq9N.lZj9Chcve7LR33AdFSZrXTS', 0, '1999-11-14 23:00:00');
+(7, 'Maubert', 'Marceau', 'marceau.maubert@laplateforme.io', '$2y$10$Dvt08RjLddP56bwbYOuCYeHB463Ow7Wz0BpKL9u6fuAAwim4DJ6CG', 1, '1999-11-14 23:00:00');
 
 -- --------------------------------------------------------
 
@@ -227,6 +252,13 @@ CREATE TABLE `wishlist` (
   `id_user` int(11) NOT NULL,
   `id_product` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `wishlist`
+--
+
+INSERT INTO `wishlist` (`id`, `id_user`, `id_product`) VALUES
+(1, 7, 6);
 
 --
 -- Indexes for dumped tables
@@ -317,25 +349,25 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `purchases_products`
 --
 ALTER TABLE `purchases_products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `subcategories`
@@ -347,13 +379,13 @@ ALTER TABLE `subcategories`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -383,7 +415,7 @@ ALTER TABLE `products`
 --
 ALTER TABLE `purchases`
   ADD CONSTRAINT `purchases_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `purchases_ibfk_2` FOREIGN KEY (`id_address`) REFERENCES `addresses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `purchases_ibfk_2` FOREIGN KEY (`id_address`) REFERENCES `addresses` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `purchases_products`

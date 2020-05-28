@@ -1,12 +1,3 @@
-<?php 
-$db = new PDO("mysql:host=127.0.0.1;dbname=boutique;charset=utf8", "root", "");
-$query = $db->prepare("SELECT name, id FROM categories");
-$query->execute();
-$categories = $query->fetchAll(PDO::FETCH_ASSOC);
-
-
-
-?>
 <nav>
 	<div id="nav">
 		<ul id="menu">
@@ -16,27 +7,16 @@ $categories = $query->fetchAll(PDO::FETCH_ASSOC);
 			<li class="nav">
 				<a class="title-header" href="products.php">Produits</a>
 				<ul class="cat">
-					<?php foreach ($categories as $category)
-					{?>	
+					<?php foreach (Category::Find() as $category) { ?>
 					<li class="sub">
-						<a class="name-header" href="products.php?category=<?php echo $category["id"]?>"><?php echo $category['name']?></a>
-						<?php
-						$id = $category["id"];
-						$request = $db->prepare("SELECT name, id FROM subcategories WHERE id_category = $id");
-						$request->execute();
-						$subcategories = $request->fetchAll(PDO::FETCH_ASSOC);
-						foreach($subcategories as $sub)
-						{
-						?>
+						<a class="name-header" href="products.php?category=<?= $category->getId() ?>"><?= $category->getName() ?></a>
+						<?php foreach(SubCategory::Find(["id_category" => $category->getId()]) as $subcategory) { ?>
 							<li class="nav-sub">
-								<a class="name-header" href="products.php?sub=<?php echo $sub['id']?>"><?php echo $sub['name']?></a>
+								<a class="name-header" href="products.php?category=<?= $category->getId() ?>&subcategory=<?= $subcategory->getId() ?>"><?= $subcategory->getName() ?></a>
 							</li>
-						<?php }?>
-						
+						<?php } ?>
 					</li>
-
-					<?php 
-				}?>
+					<?php } ?>
 				</ul>
 			</li>
 			<?php if (isset($_SESSION["user"])) { ?>

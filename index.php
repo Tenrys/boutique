@@ -32,7 +32,7 @@ usort($new, $sortMethods["release"]["sort"]);
                 <h2>Nos produits en vogue</h2>
                 <div class="item-showcase">
                     <?php foreach (array_slice($popular, 0, 3) as $product) { ?>
-                        <a class="product" href="product.php?id=<?= $product->getId() ?>">
+                        <a class="pro product" href="product.php?id=<?= $product->getId() ?>">
                             <img src="img/<?= $product->getImagePath() ?>">
                             <h3><?= $product->getName() ?></h3>
                             <p><?= $product->getDescription() ?></p>
@@ -46,7 +46,7 @@ usort($new, $sortMethods["release"]["sort"]);
                 <h2>Nos nouveaux produits</h2>
                 <div class="item-showcase">
                     <?php foreach (array_slice($new, 0, 3) as $product) { ?>
-                        <a class="product" href="product.php?id=<?= $product->getId() ?>">
+                        <a class="pro product" href="product.php?id=<?= $product->getId() ?>">
                             <img src="img/<?= $product->getImagePath() ?>">
                             <h3><?= $product->getName() ?></h3>
                             <p><?= $product->getDescription() ?></p>

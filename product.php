@@ -96,7 +96,7 @@ $comments = Comment::Find(["id_product" => $productId]);
 								<input type="submit" name="delete" value="Supprimer">
 							</form>
 						<?php } ?>
-					</div>
+					</fieldset>
 				<?php } ?>
 			</section>
 			<?php if (isset($_SESSION["user"])) { ?>

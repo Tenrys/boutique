@@ -8,6 +8,7 @@ $sort = (string)($_GET["sort"] ?? "popularity");
 $searchQuery = strtolower((string)($_GET["search_query"] ?? ""));
 
 $categories = Category::Find();
+
 if (is_numeric($categoryId)) {
     $pickedCategory = Category::Get($categoryId);
     if (is_numeric($subcategoryId)) {
@@ -55,7 +56,7 @@ usort($products, ($sortMethods[$sort] ?? $sortMethods["popularity"])["sort"]);
     <body>
         <?php require("includes/header.php") ?>
 
-        <main>
+        <main id="products">
             <section class="products">
                 <div class="title_pro">
                     <?php if (isset($found)) { ?>
@@ -76,7 +77,7 @@ usort($products, ($sortMethods[$sort] ?? $sortMethods["popularity"])["sort"]);
                     <?php } ?>
                     </p>
                 </div>
-                
+
                 <?php foreach($products as $product) { ?>
                     <div class="pro">
                     <a class="product" href="product.php?id=<?= $product->getId() ?>">
@@ -87,7 +88,7 @@ usort($products, ($sortMethods[$sort] ?? $sortMethods["popularity"])["sort"]);
                     </a>
                     </div>
                 <?php } ?>
-            
+
             </section>
             <section class="filter">
                 <form method="GET" name="filter" id="filter">

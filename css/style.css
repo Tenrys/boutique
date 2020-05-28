@@ -31,6 +31,13 @@
     font-style: italic;
 }
 /*--------------GENERAL---------*/
+html {
+    background-image: linear-gradient(0deg, #000000aa, #000000aa), url('../img/style/909546.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
 body {
     height: auto;
     width: 100%;
@@ -39,14 +46,14 @@ body {
     padding : 0;
     flex-direction: column;
     font-family: 'text';
-    background-image: url('../img/style/909546.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
+}
+* {
+    color: white;
+}
+select, option, input {
+    color: initial;
 }
 main {
-    background-color: rgba(255, 255, 255, 0.75);
     display: block;
     margin: 1em 1em;
 }
@@ -56,7 +63,6 @@ main {
 header {
     height: 20%;
     width : 100%;
-    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .button {
@@ -324,38 +330,35 @@ td {
     padding: 2%;
 }
 /*-----------PRODUCT--------------*/
-.product{
+.product {
     text-decoration: none;
     color: black;
 }
-.product:visited{
+.product:visited {
     color: black;
 }
-.text{
+.text {
     font-size: 150%;
     font-family: 'text';
 }
-section{
+section {
     padding: 2%;
 }
-.filter{
-    width : 1%;
-}
-.products{
+.products {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    width: 100%;
 }
-.pro{
+.pro {
     display: inline-block;
-    flex-grow: 1 0 21%;
     width : 25%;
     border-style: solid;
     border-color: #155869;
     margin : 1%;
     padding: 1%;
 }
-.img-pro{
+.img-pro {
     display: block;
     max-width: 30%;
     min-width: 30%;
@@ -363,21 +366,26 @@ section{
     margin-left: auto;
 
 }
-.title_pro{
+.title_pro {
     width: 100%;
     flex-grow: 1 1 100%;
 }
-input[type="submit"]{
+input[type="submit"] {
     cursor:pointer;
 }
-a{
+a {
     cursor: pointer;
 }
-.basket-content{
+.basket-content {
     display: flex;
     flex-direction: column;
     border-style: solid;
     color: #155869;
     margin :1%;
     padding: 1%;
+}
+
+#products {
+    display: flex;
+    justify-content: space-between;
 }
