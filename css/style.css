@@ -50,7 +50,7 @@ body {
 * {
     color: white;
 }
-select, option, input {
+select, option, input, textarea {
     color: initial;
 }
 main {
